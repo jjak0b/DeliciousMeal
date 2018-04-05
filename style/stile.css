@@ -1,0 +1,445 @@
+/* 
+    Created on : 29-gen-2018, 9.10.47
+    Author     : jacopo.rimediotti
+    description: foglio di stile molto incasinato
+*/
+
+.left {
+    float: left;
+    display: block;
+}
+
+.right {
+    float: right;
+    display: block;
+}
+.center {
+    text-align: center;
+    margin: auto;
+}
+.clear {
+    clear: both;
+    display: block;
+}
+
+
+body{
+    margin: 5% 5%;
+    background-color: whitesmoke;
+}
+
+
+header {
+    background-color: transparent;
+    font-family: cursive;
+    display: block;
+}
+
+.logo-container {
+    padding: 1.5%;
+}
+
+.logo-container-content {
+    
+}
+
+.logo-container-content > * {
+    color: crimson;
+    display: block;
+}
+
+.container {
+    background-color: whitesmoke;
+    padding: 1.2em;
+    margin: auto;
+}
+
+.logo-motto {
+    background-color: yellowgreen;
+    padding: 2% 0;
+
+}
+.logo-text {
+    display: block;
+    text-align: center;
+    font-family: cursive;
+    background-color: whitesmoke;
+    padding: 0 0 0 0;
+    margin: 0;
+    width: 100%;
+}
+
+img.logo {
+    display: block; /* grazie, questo mi toglie la fastidiola linea sotto l'immagine'*/
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+div.main {
+    background-color: yellowgreen;
+    font-family: cursive;
+    margin: 0 0 0 0;
+    padding: 0 0 0 0;
+}
+
+.prodotti {
+    overflow-y: scroll;
+}
+.navbar {
+    background-color: crimson;
+    margin: 0 0 0 0;
+    padding: 10px;
+    padding-bottom: 0;
+    height: max-content;
+    font-size: 2.5em;
+}
+
+/*any*/
+.dropdown {
+    position: relative;
+    padding: 0 1em;
+}
+
+/*menu*/
+.navbar > .dropdown{ 
+    display: inline-block;
+}
+/*submenu*/
+.dropdown-content > .dropdown{
+    display: block;
+}
+
+/*any*/
+.dropbtn {
+    padding: 0;
+    margin: 0;
+    color: white;
+    border: none;
+    cursor: pointer;   
+    text-decoration: none;
+}
+/*menu*/
+.dropdown > .dropdown-content {
+    left: 0;
+    box-shadow: 20px 20px 50px rgba(0,0,0,0.25);
+    list-style: none;
+    margin: 0 0 0 0;
+    padding: 0 0;/*padding: 5% 1%;*/
+    display: none;
+    position: absolute;
+    width: 100%;
+    height: max-content;
+    z-index: 1;
+}
+
+/*submenu*/
+.dropdown-content > .dropdown > .dropdown-content {
+    top: 0;
+    left: 100%;
+}
+
+.dropdown-content a {
+    color: black;
+    text-decoration: none;
+    display: block;
+}
+
+/*on default*/
+.dropdown,
+.field 
+{
+    background-color: crimson;
+}
+
+.dropdown > .dropbtn,
+.field > a {
+    padding: 0.1em 0.2em;
+}
+
+/*on hover*/
+/*show menu/submenu content*/
+.dropdown:hover > .dropdown-content {
+    display: block;
+}
+
+.field:hover > a,
+.dropdown:hover > a{
+    color: white;
+}
+
+.dropdown:hover {
+    background-color: darkred;
+    
+}
+
+.field:hover {
+    background-color: darkred;
+}
+
+/*tree*/
+
+ul.tree {
+  overflow: visible;
+}
+
+ul.tree,
+ul.tree ul {
+  width: auto;
+  margin: 0;
+  padding: 0;
+  list-style-type: none;
+}
+
+ul.tree li {
+  display: block;
+  width: auto;
+  float: left;
+  vertical-align: top;
+  padding: 0;
+  margin: 0;
+}
+
+ul.tree ul li {
+  background-image: url(data:image/gif;base64,R0lGODdhAQABAIABAAAAAP///ywAAAAAAQABAAACAkQBADs=);
+  background-repeat: repeat-x;
+  background-position: left top;
+}
+
+ul.tree li a {
+  display: block;
+  width: 7em;
+  /*
+    uncomment to fix levels
+    height: 1.5em;
+  */
+  margin: 0 auto;
+  text-align: center;
+  white-space: normal;
+  letter-spacing: normal;
+  text-decoration: none;
+
+}
+ul.tree ul li:last-child {
+  background-repeat: no-repeat;
+  background-size:50% 0.1em;
+  background-position: left top;
+}
+ul.tree ul li:first-child {
+  background-repeat: no-repeat;
+  background-size: 50% 0.1em;
+  background-position: right top;
+}
+ul.tree ul li:first-child:last-child {
+  background: none;
+}
+ul.tree ul li a {
+  background: url(data:image/gif;base64,R0lGODdhAQABAIABAAAAAP///ywAAAAAAQABAAACAkQBADs=) no-repeat 50% top;
+  background-size: 0.1em 0.8em;
+  padding-top: 1.2em;
+}
+ul.tree ul {
+  background: url(data:image/gif;base64,R0lGODdhAQABAIABAAAAAP///ywAAAAAAQABAAACAkQBADs=) no-repeat 50% top;
+  background-size: 0.1em 0.8em;
+  margin-top: 0.2ex;
+  padding-top: 0.8em;
+}
+ul.tree,
+#wrapper {
+  width: max-content;
+  margin: 0 auto;
+}
+ul.tree {
+  width: max-content;
+}
+.clearer {
+  clear: both;
+}
+
+ul.tree ul li {
+    background-color: transparent;
+}
+
+#tree-content {
+    top: 0;
+    left: 100%;
+    width: 200%;
+    height: 10em ;
+    overflow: auto;
+    background-color: whitesmoke;
+}
+
+#tree-content > p{
+    text-align: justify;
+    margin: 2% 2%;
+}
+
+/* prodotti */
+.menu-list {
+    display: block;
+    margin: auto;
+    padding: 1px 0;
+    background-color: yellowgreen;
+}
+
+.menu-elem {
+    display: block;
+    margin: 0.5em 0;
+    padding: 0;
+    list-style: none;
+    background-color: whitesmoke;
+}
+
+.product-header,
+.product-content{
+    padding: 0.5em;
+}
+
+.product-name,
+.product-description
+{
+    margin: 0 0;
+    display: inline-block;
+    width: 80%;
+}
+
+.product-price,
+.product-assets {
+    margin: auto;
+    display: inline-block;
+    width: auto;
+}
+
+.product-assets > ul > .field
+{
+    color: white;
+    padding: 0.5em;
+}
+
+/*Login*/
+
+/* Full-width inputs */
+input {
+    width: 100%;
+    padding: 0.8em 1em;
+    margin: 1em 0;
+    display: inline-block;
+    box-sizing: border-box;
+}
+
+/* Set a style for all buttons */
+button {
+    background-color: crimson;
+    color: white;
+    padding: 0.8em 1em;
+    border: none;
+    cursor: pointer;
+    width: 100%;
+}
+
+/* Add a hover effect for buttons */
+button:hover {
+    opacity: 0.8;
+}
+
+/* Center the image and position the close button */
+.imgcontainer {
+    text-align: center;
+    position: relative;
+}
+
+.modal {
+    display: none; /* Hidden by default */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Sit on top */
+    left: 0;
+    top: 0;
+    width: 100%; /* Full width */
+    height: 100%; /* Full height */
+    overflow: auto; /* Enable scroll if needed */
+    background-color: rgb(0,0,0); /* Fallback color */
+    background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    padding-top: 60px;
+}
+
+/* Modal Content/Box */
+.modal-content {
+    background-color: #fefefe;
+    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    border: 1px solid #888;
+    width: 50%; /* Could be more or less, depending on screen size */
+}
+
+/* The Close Button (x) */
+.close {
+    position: absolute;
+    right: 25px;
+    top: 0;
+    color: #000;
+    font-size: 35px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: red;
+    cursor: pointer;
+}
+
+/* Add Zoom Animation */
+.animate {
+    /*-webkit-animation: animatezoom 0.6s;
+    animation: mymove 0.6s*/
+    -webkit-animation: animatezoom 0.6s; /* Chrome, Safari, Opera */
+    animation: animatezoom 0.6s
+}
+
+.blind-content
+{
+   transition-property: max-height, height;
+   /*overflow: hidden;*/
+}
+
+@-webkit-keyframes animatezoom {
+    from {-webkit-transform: scale(0)} 
+    to {-webkit-transform: scale(1)}
+}
+    
+@keyframes animatezoom {
+    from {transform: scale(0)} 
+    to {transform: scale(1)}
+}
+
+.blind-content.in
+{
+     -webkit-animation: blind-in 3s;
+    animation: blind-in 3s;
+}
+
+.blind-content.out
+{
+    -webkit-animation: blind-out 3s;
+    animation: blind-out 3s;
+}
+
+@-webkit-keyframes blind-in {
+      0% { max-height:0; }
+    100% { max-height: 1000px; }
+}
+
+@-webkit-keyframes blind-out {
+    0% { max-height: 1000px; }
+    100% {  max-height:0;  }
+}
+
+
+@keyframes blind-in {
+      0% { max-height:0; }
+    100% { max-height: 1000px; }
+}
+
+@keyframes blind-out {
+    0% { max-height: 1000px; }
+    100% {  max-height:0;  }
+}
