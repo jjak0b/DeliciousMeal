@@ -276,6 +276,7 @@ ul.tree ul li {
 }
 
 /* prodotti */
+.menu-list_t,
 .menu-list {
     display: block;
     margin: auto;
@@ -291,24 +292,78 @@ ul.tree ul li {
     background-color: whitesmoke;
 }
 
-.product-header,
-.product-content{
-    padding: 0.5em;
-}
-
 .product-name,
 .product-description
 {
-    margin: 0 0;
+    margin: 0;
     display: inline-block;
-    width: 80%;
+    word-wrap:break-word;
+    vertical-align: middle;
 }
 
-.product-price,
+.product-description,
+.product-assets,
+.product-general
+{
+   float: left;
+}
+
+.product-header
+{
+    width: 80%;
+}
+.product-content
+{
+    width: 100%
+}
+.product-general
+{
+    width: 10%;
+}
+
+
+/*product HEADER*/
+
+.product-price
+{
+    width: 100%;
+}
+/*product content*/
+.product-description
+{
+    width: 50%;
+    margin: 0 0;
+}
 .product-assets {
-    margin: auto;
-    display: inline-block;
-    width: auto;
+    
+    width: 25%;/*negli inline-block che creano uno whitespace aggiunge un meno dell 1%*/
+    vertical-align: middle;
+    font-size: initial;
+    height: 100%;
+    
+}
+
+/*product-assets*/
+.product-preview
+{
+    
+    width: 100%;
+    display: block;
+    vertical-align: middle;
+}
+.product-preview > *
+{
+    width: 75%;
+}
+
+.product-name
+{
+    width: 75%;
+}
+
+.product-name
+{
+    width: 50%;
 }
 
 .product-assets > ul > .field
