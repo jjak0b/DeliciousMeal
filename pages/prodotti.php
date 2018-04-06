@@ -51,18 +51,50 @@
                 </div>
                 <ul class="menu-list">
                 </ul>
-                <!--
+                prova
                 <div class="menu-elem">
-                    <div class="product-header">
-                        <h4 class="product-name">nome</h4>
-                        <div class="product-price">prezzo</div>
-                    </div>
-
-                    <div class="product-content">
-                        <div class="product-description">
-                            descrizione dgdfcvb sdfffffffffffffffffffffffffffffffffffffff fdf dsfest segf sdfds<br>
-                            dsgcsexdcghdvgssbnhv vrtffffffffffffffffffffffffffe  fettttttttttttttttttttttttttttttttttttttttttttttttttrfedwyy <br>
+                    <div class="left" style="display: inline-block;"  >
+                        <div class="product-header">
+                            <h4 class="product-name">nome</h4>
+                            <div class="product-price">prezzo</div>
                         </div>
+
+                        <div class="product-content">
+                            <div class="product-description">
+                                descrizione dgdfcvb sdfffffffffffffffffffffffffffffffffffffff fdf dsfest segf sdfds<br>
+                                dsgcsexdcghdvgssbnhv vrtffffffffffffffffffffffffffe  fettttttttttttttttttttttttttttttttttttttttttttttttttrfedwyy <br>
+                            </div>
+                            <div class="product-assets dropdown">
+                                <a class="dropbtn">Ingredienti</a>
+                                <ul class="dropdown-content">
+                                    <li>Uova</li>
+                                    <li>Pasta</li>
+                                    <li>Pomodoro</li>
+                                    <li>Rucola</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                    </div >
+                    <div class="left" style="display: inline-block" title="ordina">
+                        <button style="margin: 50% auto;">Ordina</button>
+                    </div>
+                </div>
+                <div class="menu-elem">
+                    <div>
+                        <div class="product-header">
+                            <h4 class="product-name">nome</h4>
+                            <div class="product-description">
+                                descrizione dgdfcvb sdfffffffffffffffffffffffffffffffffffffff fdf dsfest segf sdfds<br>
+                                dsgcsexdcghdvgssbnhv vrtffffffffffffffffffffffffffe  fettttttttttttttttttttttttttttttttttttttttttttttttttrfedwyy <br>
+                            </div>
+                        </div>
+                    </div>
+                    <div>
+                        <img src="img/carbonara.jpg"/>
+                    </div>
+                    <div>
+                        <div class="product-price">prezzo</div>
                         <div class="product-assets dropdown">
                             <a class="dropbtn">Ingredienti</a>
                             <ul class="dropdown-content">
@@ -73,8 +105,12 @@
                             </ul>
                         </div>
                     </div>
-
-                </div>-->
+                    <div>
+                        <div class="left" style="display: inline-block" title="ordina">
+                            <button style="margin: 50% auto;">Ordina</button>
+                        </div>                        
+                    </div>
+                </div>
             </div>
             <script src="scripts/menu.js"></script>
         </div>

@@ -53,20 +53,28 @@
                     }
                 ?>
                 </div>
-                <?php
-                    if( !isset( $_SESSION['user_login'] ) )
-                    {
-                        echo "<p>Se sei un dipendente della nostra azienda, accedi con le credenziali fornite</p>";
-                        echo "<div class=\"login_form\" style=\"display: block;\">";
-                        include_once( "../../forms/loginForm.php" );
-                        echo "</div>";
-                    }else{
-                        echo "<section>";
-                        echo "sezione sempre presente dopo login per scopo didattico, altrimenti dovrebbe apparire solo se l'utente loggato è stato assegnato alla direzione o risorse umane";
-                        echo "</section>";
-                        include_once( "../../forms/assignUsersForm.php" );
-                    }
-                ?>
+                <div id="area_personale">
+                    
+                    <?php
+                        if( !isset( $_SESSION['user_login'] ) )
+                        {
+                            echo "<p>Se sei un dipendente della nostra azienda, accedi con le credenziali fornite</p>";
+                            echo "<div class=\"login_form\" style=\"display: block;\">";
+                            include_once( "../../forms/loginForm.php" );
+                            echo "</div>";
+                        }else{
+                            echo "<section>";
+                            echo "sezione sempre presente dopo login per scopo didattico, altrimenti dovrebbe apparire solo se l'utente loggato è stato assegnato alla direzione o risorse umane";
+                            echo "</section>";
+                            echo "<script src=\"scripts/area_personale.js\"></script>";
+                            echo "<div id=\"workArea\">";
+                            // include_once( "../../forms/assignUsersForm.php" );
+                            echo "<div>";
+                            
+                            
+                        }
+                    ?>
+                </div>
             </div>
         </div>
     </body>
