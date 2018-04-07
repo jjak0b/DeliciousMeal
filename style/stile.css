@@ -287,7 +287,6 @@ ul.tree ul li {
 .menu-elem {
     display: block;
     margin: 0.5em 0;
-    padding: 0;
     list-style: none;
     background-color: whitesmoke;
 }
@@ -295,27 +294,36 @@ ul.tree ul li {
 .product-name,
 .product-description
 {
-    margin: 0;
     display: inline-block;
     word-wrap:break-word;
     vertical-align: middle;
 }
 
+.product-header,
+.product-content
+{
+    margin: 0.8em;
+}
+
 .product-description,
 .product-assets,
-.product-general
+.product-general,
+.product-list
 {
-   float: left;
+   /*float: left;*/
+   display: inline-block;
 }
 
 .product-header
 {
     width: 80%;
 }
+
 .product-content
 {
-    width: 100%
+    width: 100%;
 }
+
 .product-general
 {
     width: 10%;
@@ -332,33 +340,73 @@ ul.tree ul li {
 .product-description
 {
     width: 50%;
-    margin: 0 0;
-}
-.product-assets {
-    
-    width: 25%;/*negli inline-block che creano uno whitespace aggiunge un meno dell 1%*/
     vertical-align: middle;
-    font-size: initial;
-    height: 100%;
-    
 }
 
+.product-assets {
+    
+    /*negli inline-block che creano uno whitespace aggiunge un meno dell 1%*/
+    min-width: min-content;
+    width: min-content;
+    max-width: min-content;
+    vertical-align: middle;
+    font-size: initial;
+}
+
+.product-description,
+.product-assets,
+.product-general
+{
+    margin: 0.8em 3.5em;
+    margin-left: 0;
+    vertical-align: middle;
+}
+
+
+/* Use a media query to add a break point at 800px: */
+@media screen and (max-width:850px) {
+    .product-description
+    {
+      width:100%; /* The width is 100%, when the viewport is 800px or smaller */
+    }
+
+    .product-assets,
+    .product-general
+    {
+        text-align: center;
+        margin: 0 10%;
+        width: 40%;
+    }
+}
+.product-assets
+{
+
+}
 /*product-assets*/
 .product-preview
 {
-    
     width: 100%;
     display: block;
     vertical-align: middle;
 }
 .product-preview > *
 {
-    width: 75%;
+    height: 180px;
+    width: 300px;
 }
-
-.product-name
+.product-preview:hover
 {
-    width: 75%;
+    transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+}
+.product-list
+{
+    display: block;
+    vertical-align: middle;
+}
+.product-general
+{
+    vertical-align: middle;
+    min-width: max-content;
 }
 
 .product-name
@@ -391,6 +439,7 @@ button {
     border: none;
     cursor: pointer;
     width: 100%;
+    min-width: max-content;
 }
 
 /* Add a hover effect for buttons */

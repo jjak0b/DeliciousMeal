@@ -21,7 +21,7 @@
                         );*/
     $key_words = explode(" ", $filter);
     $query = search_like(
-                        array("p.id", "p.nome", "p.prezzo", "p.descrizione", "p.categoria"),
+                        array("p.id", "p.nome", "p.prezzo", "p.descrizione", "p.categoria", "p.img"),
                         array("pietanze p"),
                         "p.nome",
                         $key_words
@@ -59,15 +59,69 @@
         {
             $ingredienti[] = $row;
         }
-
+        printPiatto( $connection, $piatto, $ingredienti );
+        // printListPiatti_old( $connection, $piatto, $ingredienti);
+    }
+    
+    mysqli_close( $connection );
+    
+    function printPiatto( $connection, $piatto, $ingredienti )
+    {
+        echo "<li class=\"menu-elem blind-content in\" value=".$piatto["id"].">";
+            echo "<div class=\"product-header\">";
+                echo "<h4 class=\"product-name\">".$piatto['nome']."</h4>";
+            echo "</div>";
+            echo "<div class=\"product-content\">";
+                echo "<div class=\"product-description\">".$piatto['descrizione']."</div>";
+                echo "<div class=\"product-assets\">";
+                    if( isset( $piatto['img'] ) )
+                    {
+                        echo "<div class=\"product-preview\">";
+                            echo "<img src=\"img/".$piatto['img']."\" alt=\"".$piatto['nome']."\" />";
+                        echo "</div>";
+                    }
+                    echo "<div class=\"product-list\">";
+                    if( count( $ingredienti) > 0 )
+                    {
+                        echo "<div class=\"dropdown\">";
+                            echo "<a class=\"dropbtn\">Ingredienti</a>";
+                            echo "<ul class=\"dropdown-content\" style=\"top: 0; right: 100%; background-color:whitesmoke\">";
+                                foreach ($ingredienti as $key => $ingrediente) {
+                                    echo "<li class=\"field ingrediente\">".$ingrediente['nome']."</li>";
+                                }
+                            echo "</ul>";
+                        echo "</div>";
+                    }
+                    else if( $piatto['categoria'] == 5 )// bevande
+                    {
+                        $query_bevanda = "SELECT pi.quantita_ingrediente
+                                          FROM pietanze p, ingredienti_pietanze pi
+                                          WHERE p.id = pi.id_pietanza AND p.id = ".$piatto['id'];
+                        $result_bevanda = mysqli_query($connection, $query_bevanda);
+                        $bevanda = mysqli_fetch_array($result_bevanda);
+                        $qta = $bevanda['quantita_ingrediente'];
+                        echo "<div>Lt. ".$qta."</div>";
+                    }
+                    echo "</div>";
+                echo "</div>";
+                echo "<div class=\"product-general\">";
+                    echo "<div class=\"product-price\" style=\"width: 100%; display: inline-block;\" >Euro ".$piatto['prezzo']."</div>";
+                    echo "<button style=\"width: 100%; display: inline-block;\">Ordina</button>";
+                echo "</div>";
+            echo "</div>";
+        echo "</li>";
+    }
+    
+    function printPiattoOld( $connection, $piatto, $ingredienti)
+    {
         echo "<li class=\"menu-elem blind-content in\">";
         echo "<div>";
             echo "<div class=\"product-header\">";
-                echo "<h4 class=\"product-name\">".$nome."</h4>";
-                echo "<div class=\"product-price\">Euro ".$prezzo."</div>";
+                echo "<h4 class=\"product-name\">".$piatto['nome']."</h4>";
+                echo "<div class=\"product-price\">Euro ".$piatto['prezzo']."</div>";
             echo "</div>";
             echo "<div class=\"product-content\">";
-                echo "<div class=\"product-description\">".$descrizione."</div>";
+                echo "<div class=\"product-description\">".$piatto['descrizione']."</div>";
                 echo "<div class=\"product-assets";
 
                 if( count( $ingredienti) > 0 )
@@ -84,7 +138,7 @@
                 {
                     $query_bevanda = "SELECT pi.quantita_ingrediente
                                       FROM pietanze p, ingredienti_pietanze pi
-                                      WHERE p.id = pi.id_pietanza AND p.id = $id";
+                                      WHERE p.id = pi.id_pietanza AND p.id = ".$piatto['id'];
                     $result_bevanda = mysqli_query($connection, $query_bevanda);
                     $bevanda = mysqli_fetch_array($result_bevanda);
                     echo "\">"; // se è una bevanda senza ingredienti particolari, chiudo il tag "CLASS"
@@ -101,4 +155,3 @@
         echo "</div>";
         echo "</li>";
     }
-    mysqli_close( $connection );

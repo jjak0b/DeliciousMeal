@@ -55,36 +55,32 @@
                 <ul class="menu-list_t">
                     
                     <li class="menu-elem blind-content in">
-                        <div>
-                            <div class="product-header">
-                                <h4 class="product-name">Crostini toscani</h4>
-                            </div>
-                            <div class="product-content">
-                                <div class="product-description">
-                                    ChmYbjuJTxTuMXGmKamn5zFFXmjCzBaEhyUSiWcI82LEPeFSKmpli40ay8pgbb1FLcrSVq9TCzwaI4eK3WnCoCHHbREMYjjKpnqoIKOHz3pLW1aEMx8LoJnzifvTCjBbCTXmvOWDlwKLR3ofXsTWFnI4AmTeuHt6ObnW3b9o0QW9sD61qYcrpnejskYVZaTPeH16wsIQZRv6E7FoWmKNA1zZSdsKLfjdtoKrvHhb2fEYDtQaW3dWGSr1VoIExJF
-                                </div>
-                                <div class="product-assets">
-                                    <div class="product-preview">
-                                        <img src="img/carbonara.jpg" />
-                                    </div>
-                                    <div style="width: 100%; display: block; vertical-align: middle;">
-                                        <div class="dropdown">
-                                            <a class="dropbtn">Ingredienti</a>
-                                            <ul class="dropdown-content" style="top: 0; right: 100%; background-color:whitesmoke">
-                                                <li class="field ingrediente">fegatini</li>
-                                                <li class="field ingrediente">pane</li>
-                                            </ul>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="product-general">
-                                    <div class="product-price" style="width: 100%; display: inline-block;" >Euro 3.50</div>
-                                    <button style="width: 100%; display: inline-block;">Ordina</button>
-                                </div>
-                            </div>
-                            <div class="clear"></div>
+                        <div class="product-header">
+                            <h4 class="product-name">Crostini toscani</h4>
                         </div>
-                            
+                        <div class="product-content">
+                            <div class="product-description">
+                                ChmYbjuJTxTuMXGmKamn5zFFXmjCzBaEhyUSiWcI82LEPeFSKmpli40ay8pgbb1FLcrSVq9TCzwaI4eK3WnCoCHHbREMYjjKpnqoIKOHz3pLW1aEMx8LoJnzifvTCjBbCTXmvOWDlwKLR3ofXsTWFnI4AmTeuHt6ObnW3b9o0QW9sD61qYcrpnejskYVZaTPeH16wsIQZRv6E7FoWmKNA1zZSdsKLfjdtoKrvHhb2fEYDtQaW3dWGSr1VoIExJF
+                            </div>
+                            <div class="product-assets">
+                                <div class="product-preview">
+                                    <img src="img/carbonara.jpg" />
+                                </div>
+                                <div class="product-list">
+                                    <div class="dropdown">
+                                        <a class="dropbtn">Ingredienti</a>
+                                        <ul class="dropdown-content" style="top: 0; right: 100%; background-color:whitesmoke">
+                                            <li class="field ingrediente">fegatini</li>
+                                            <li class="field ingrediente">pane</li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="product-general">
+                                <div class="product-price" style="width: 100%; display: inline-block;" >Euro 3.50</div>
+                                <button style="width: 100%; display: inline-block;">Ordina</button>
+                            </div>
+                        </div>
                     </li>
                     <!--
                     <li class="menu-elem">
