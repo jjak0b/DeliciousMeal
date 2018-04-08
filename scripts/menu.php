@@ -106,7 +106,7 @@
                 echo "</div>";
                 echo "<div class=\"product-general\">";
                     echo "<div class=\"product-price\" style=\"width: 100%; display: inline-block;\" >Euro ".$piatto['prezzo']."</div>";
-                    echo "<button style=\"width: 100%; display: inline-block;\">Ordina</button>";
+                    echo "<button  class=\"order_button\" onclick=\"addToCart( this, ".$piatto["id"]." )\" style=\"width: 100%; display: inline-block;\">Ordina</button>";
                 echo "</div>";
             echo "</div>";
         echo "</li>";

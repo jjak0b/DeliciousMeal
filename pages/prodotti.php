@@ -78,7 +78,7 @@
                             </div>
                             <div class="product-general">
                                 <div class="product-price" style="width: 100%; display: inline-block;" >Euro 3.50</div>
-                                <button style="width: 100%; display: inline-block;">Ordina</button>
+                                <button onclick="addToCart(this) "style="width: 100%; display: inline-block;">Ordina</button>
                             </div>
                         </div>
                     </li>
@@ -117,6 +117,7 @@
                 </ul>
             </div>
             <script src="scripts/menu.js"></script>
+            <script src="scripts/carrello.js"></script>
         </div>
         <?php
             mysqli_close( $connection );
