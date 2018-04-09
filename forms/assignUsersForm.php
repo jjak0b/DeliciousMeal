@@ -1,4 +1,4 @@
-<form action="" method="post" class="center">
+<div class="center">
     <section>
         <select id="users" name="users" style="min-width: 40%">
         </select>
@@ -54,4 +54,4 @@
     <script src="scripts/users.js"></script>
     <script src="scripts/unita.js"></script>
     <script src="scripts/ruoli.js"></script>
-</form>
+</div>

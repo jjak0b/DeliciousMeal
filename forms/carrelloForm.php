@@ -2,30 +2,35 @@
 include_once('../config.php' );
 include_once("../scripts/utility.php");
 
-$connection = mysqli_connect(HOST, USER, PASSWORD, DB_NAME );
-// Check connection
-if ( mysqli_connect_errno() )
-{
-    echo "Failed to connect to MySQL: " . mysqli_connect_error();
-}
-
-function get_product_info( $id_value )
+function get_product_info( $connection, $id_value )
 {
     
     $query = quick_select2(
                 array("p.id", "p.nome", "p.prezzo", "p.descrizione", "p.categoria", "p.img"),
                 array("pietanze p"),
                 array("p.id"),
-                array( id_value )
+                array( $id_value )
                 );
+    echo $query;
     $result = mysqli_query($connection, $query);
     $row = mysqli_fetch_assoc( $result );
     return $row;
 }
+
+$connection = mysqli_connect(HOST, USER, PASSWORD, DB_NAME );
+// Check connection
+if ( mysqli_connect_errno() )
+{
+    echo "Failed to connect to MySQL: " . mysqli_connect_error();
+}
 // in questo caso aggiunge un prodotto con id specifico gli ingredienti di default, che poi potrà essere modficato
+if( !isset( $_SESSION['carrello'] ) ){
+    $_SESSION['carrello'] = [];
+}
+
 if( isset( $_POST['add'] ) )
 {
-    $p = get_product_info( $_POST['add'] );
+    $p = get_product_info( $connection, $_POST['add'] );
     $_SESSION['carrello'][] = $p;
 }
 // questo non rimuoverà un id di un prodotto ma un l'indice del carrello
@@ -34,7 +39,10 @@ if( isset( $_POST['add'] ) )
 // e ci può essere 1 prodotto con id 1 in quantità 1 con specifici elementi rimossi o aggiunti
 if( isset( $_POST['remove'] ) )
 {
-    // non so se mantenere questo perchè forse salvo il carrello nel database...
+        // non so se mantenere questo perchè forse salvo il carrello nel database...
+    if( isset( $_SESSION['carrello'][ $_POST['remove'] ] ) ){
+        unset( $_SESSION['carrello'][ $_POST['remove'] ] );
+    }
 }
 /*
  * $_SESSION['carrello'] // array di prodotti ordinati
@@ -45,11 +53,14 @@ if( isset( $_POST['remove'] ) )
  * p["note"] // note aggiuntive sul prodotto
  */
 ?>
-<form class="modal">
+<section>
+    <div class="container">
     <?php
     $prodotti_ordinati = $_SESSION['carrello'];
+    echo "numero prodotti:".count( $prodotti_ordinati );
     foreach ($prodotti_ordinati as $key => $prodotto) {
-        echo "<li id=c_".$key." value=".$prodotto['id'].">";
+        $id_li = "c_".$key;
+        echo "<li id=".$id_li."value=".$prodotto['id'].">";
             echo "<table>";
                 echo "<tr>";
                     echo "<td>";
@@ -80,13 +91,23 @@ if( isset( $_POST['remove'] ) )
                             }
                             echo "</div>";
                         }
-                        echo "<textarea>".$prodotto["note"]."</textarea>";
+                        echo "<textarea>";
+                        if( isset( $prodotto["note"] ) ){
+                            echo $prodotto["note"];
+                        }
+                        echo "</textarea>";
                     echo "</td>";
-                    echo "<td><input type=\"number\ value=".$prodotto["qta"]."></td>";
+                    $qta = 1;
+                    if( isset( $prodotto["qta"] ) ){
+                        $qta = $prodotto["qta"];
+                    }
+                    echo "<td><input type=\"number\" value=".$qta."></td>";
                     echo "<td><button>Modifica</button></td>";
+                    echo "<td><span onclick=\"removeFromCart(this, '$id_li')\" class=\"remove\" title=\"Rimuovi\">&times;</span></td>";
                 echo "</tr>";
             echo "</table>";
         echo "</li>";
     }
     ?>
-</form>
+    </div>
+</section>

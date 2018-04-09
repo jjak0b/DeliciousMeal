@@ -64,7 +64,7 @@
                             </div>
                             <div class="product-assets">
                                 <div class="product-preview">
-                                    <img src="img/carbonara.jpg" />
+                                    <img src="img/products/primi/spaghetti_carbonara.jpg" />
                                 </div>
                                 <div class="product-list">
                                     <div class="dropdown">
@@ -78,7 +78,7 @@
                             </div>
                             <div class="product-general">
                                 <div class="product-price" style="width: 100%; display: inline-block;" >Euro 3.50</div>
-                                <button onclick="addToCart(this) "style="width: 100%; display: inline-block;">Ordina</button>
+                                <button onclick="addToCart(this)" style="width: 100%; display: inline-block;">Ordina</button>
                             </div>
                         </div>
                     </li>

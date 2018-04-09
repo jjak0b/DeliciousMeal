@@ -485,6 +485,8 @@ button:hover {
     font-weight: bold;
 }
 
+.remove:hover,
+.remove:focus,
 .close:hover,
 .close:focus {
     color: red;

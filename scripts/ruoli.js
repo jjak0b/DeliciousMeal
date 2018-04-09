@@ -46,6 +46,7 @@ function add_ruolo(){
             },
             success: function (response) 
             {
+                get_ruoli();
                 // alert( "add_ruolo "+ JSON.stringify( values ) +" : " + response );
             }
     } );
@@ -70,9 +71,8 @@ function delete_ruolo(){
             },
             success: function (response) 
             {
+                get_ruoli();
                 //alert( "delete_ruolo "+ JSON.stringify( values ) +" : " + response );
             }
     } );
-    
-    get_ruoli();
 }
