@@ -1,5 +1,5 @@
 <form class="modal-content animate" action="scripts/login.php" method="post">
-    <div class="imgcontainer">
+    <div class="header_container">
       <span onclick="document.getElementById('login_form').style.display='none'" class="close" title="Chiudi">&times;</span>
     </div>
 

@@ -54,13 +54,12 @@ if( isset( $_POST['remove'] ) )
  */
 ?>
 <section>
-    <div class="container">
     <?php
     $prodotti_ordinati = $_SESSION['carrello'];
     echo "numero prodotti:".count( $prodotti_ordinati );
     foreach ($prodotti_ordinati as $key => $prodotto) {
         $id_li = "c_".$key;
-        echo "<li id=".$id_li."value=".$prodotto['id'].">";
+        echo "<li id=".$id_li." value=".$prodotto['id'].">";
             echo "<table>";
                 echo "<tr>";
                     echo "<td>";
@@ -101,7 +100,7 @@ if( isset( $_POST['remove'] ) )
                     if( isset( $prodotto["qta"] ) ){
                         $qta = $prodotto["qta"];
                     }
-                    echo "<td><input type=\"number\" value=".$qta."></td>";
+                    echo "<td><input type=\"number\" name=\"quantity\" value=".$qta." min=1></td>";
                     echo "<td><button>Modifica</button></td>";
                     echo "<td><span onclick=\"removeFromCart(this, '$id_li')\" class=\"remove\" title=\"Rimuovi\">&times;</span></td>";
                 echo "</tr>";
@@ -109,5 +108,4 @@ if( isset( $_POST['remove'] ) )
         echo "</li>";
     }
     ?>
-    </div>
 </section>

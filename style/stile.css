@@ -48,10 +48,16 @@ header {
     display: block;
 }
 
+.header_container,
 .container {
     background-color: whitesmoke;
     padding: 1.2em;
     margin: auto;
+}
+
+.header_container {
+    padding-top: 0;
+    padding-bottom: 0;
 }
 
 .logo-motto {
@@ -477,12 +483,12 @@ button:hover {
 
 /* The Close Button (x) */
 .close {
-    position: absolute;
-    right: 25px;
-    top: 0;
+    position: relative;
     color: #000;
     font-size: 35px;
     font-weight: bold;
+    text-align: right;
+    display: block;
 }
 
 .remove:hover,
