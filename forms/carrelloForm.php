@@ -55,9 +55,8 @@ if( isset( $_POST['remove'] ) )
 ?>
 <section>
     <?php
-    $prodotti_ordinati = $_SESSION['carrello'];
-    echo "numero prodotti:".count( $prodotti_ordinati );
-    foreach ($prodotti_ordinati as $key => $prodotto) {
+    echo "numero prodotti:".count( $_SESSION['carrello'] );
+    foreach ($_SESSION['carrello']as $key => $prodotto) {
         $id_li = "c_".$key;
         echo "<li id=".$id_li." value=".$prodotto['id'].">";
             echo "<table>";
@@ -90,18 +89,21 @@ if( isset( $_POST['remove'] ) )
                             }
                             echo "</div>";
                         }
-                        echo "<textarea>";
+                        echo "<textarea name=\"note\">";
                         if( isset( $prodotto["note"] ) ){
                             echo $prodotto["note"];
                         }
                         echo "</textarea>";
                     echo "</td>";
                     $qta = 1;
-                    if( isset( $prodotto["qta"] ) ){
+                    if( !isset( $prodotto["qta"] ) ){
+                        $_SESSION['carrello'][$key]["qta"] = 1;
+                    }
+                    else{
                         $qta = $prodotto["qta"];
                     }
-                    echo "<td><input type=\"number\" name=\"quantity\" value=".$qta." min=1></td>";
-                    echo "<td><button>Modifica</button></td>";
+                    echo "<td><input type=\"number\" name=quantity value=".$qta." min=1></td>";
+                    echo "<td><button onclick=\"modificaIngredienti(this, '$id_li')\">Modifica</button></td>";
                     echo "<td><span onclick=\"removeFromCart(this, '$id_li')\" class=\"remove\" title=\"Rimuovi\">&times;</span></td>";
                 echo "</tr>";
             echo "</table>";

@@ -482,6 +482,7 @@ button:hover {
 }
 
 /* The Close Button (x) */
+.remove,
 .close {
     position: relative;
     color: #000;
@@ -489,6 +490,8 @@ button:hover {
     font-weight: bold;
     text-align: right;
     display: block;
+    width: max-content;
+    margin-left: auto;
 }
 
 .remove:hover,

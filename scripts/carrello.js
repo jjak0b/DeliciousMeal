@@ -1,3 +1,18 @@
+function modificaIngredienti( element, id){
+    var content = "";
+    var div_content = $("<div>");
+    
+    var section_current = $("<section>");
+    var section_available = $("<section>");
+    var add_btn = $("<button>");
+    var remove_btn = $("<button>");
+    
+    
+    
+    // $( div_content );
+    var div_modal = createModalForm( content );
+    
+}
 function addToCart( element, id )
 {
     $.ajax(
@@ -36,9 +51,11 @@ function removeFromCart( element, id_elem ){
 function updateCart( element, id_elem ){
     var values = id_elem.split("_");
     var index = values[1];
-    var info = [];
+    var info = {};
+    info.ite
+    info['id'] = $(element).val();
     info['qta'] = $(element).find( "[name='quantity']" ).val();
-    
+    info['note'] = $(element).find( "[name='note']" ).val();
     var value = { index: index, data: info };
     $.ajax(
     {
@@ -51,23 +68,31 @@ function updateCart( element, id_elem ){
         },
         success: function (response) 
         {
-            updateCartContent( response );
+            updateCartContent( response, true);
         }
     });   
 }
 
-function updateCartContent( html ){
+function updateCartContent( html, b_updateonly ){
+   
+    var div = undefined;
     if( $( "#cart_form" ).length > 0 ){
-        var cart_div = $( "#cart_form" );
-        cart_div.find(".container").html( html );
-        cart_div.css( "display", "block" );
+        div = $( "#cart_form" );
+        div.find(".container").html( html );
     }
     else{
-        var div = createModalForm( html );
-        $( div ).on('closed', updateCart  );
+        div = createModalForm( html );
+        $( div ).on('closed', function( event, element, id_elem){
+            $( element ).find( "li" ).each( function( index, element ){
+                updateCart( element, $( element ).attr("id") );
+            });
+            
+        });
         $( div ).attr( "id", "cart_form" );
-        $( div ).css( "display", "block" );
         $( div ).insertAfter( "#menu_filter" );
+    }
+    if( !(b_updateonly != undefined && b_updateonly == true) ){
+            div.css( "display", "block" );
     }
 }
 
@@ -111,6 +136,7 @@ function createModalForm( content ){
 }
 
 function closeModalForm( event ){
-    $(event.data.div).css( "display", "none");
-    $(event.data.div).trigger("closed", { element: event.data.div, id: $( event.data.div ).attr( "id" ) } );
+    $(event.data.div).trigger("closed", [ event.data.div, $( event.data.div ).attr( "id" ) ] );
+    $(event.data.div).css( "display", "none" );
+    
 }
