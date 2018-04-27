@@ -6,6 +6,7 @@
 <base href="<?php echo PROJECT_ROOT ?>" >
 <meta name="description" content="Ordina, Paga, mangia: scopri il nostro ristorante Delicious Meal e assapora le nostre specialità nella nostra sede oppure ordinando online" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta http-equiv="content-type" content="text/html; charset=utf-8">
 <meta charset="Unicode/UTF-8">
 <link rel="stylesheet" href="style/stile.css">
 <link rel="shortcut icon" href="img/logo.png">

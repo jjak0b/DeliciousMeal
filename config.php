@@ -1,7 +1,6 @@
 <?php
 
-// header('Content-Type: text/html; charset=\"ISO-8859-1\"');
-header('charset=utf-8');
+header('Content-Type: text/html; charset=\"utf-8\"');
 
 $uri = "";
 if (!empty($_SERVER['HTTPS']) && ('on' == $_SERVER['HTTPS'])) {

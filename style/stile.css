@@ -301,8 +301,11 @@ ul.tree ul li {
 .product-description
 {
     display: inline-block;
-    word-wrap:break-word;
     vertical-align: middle;
+}
+.product-description
+{
+    word-wrap:break-word;
 }
 
 .product-header,
@@ -382,6 +385,15 @@ ul.tree ul li {
         text-align: center;
         margin: 0 10%;
         width: 40%;
+    }
+    
+    .product-item > td
+    {
+        display: inline-block;
+    }
+    .product-item > td > span
+    {
+        float: right;
     }
 }
 .product-assets
@@ -478,7 +490,9 @@ button:hover {
     background-color: #fefefe;
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
     border: 1px solid #888;
-    width: 50%; /* Could be more or less, depending on screen size */
+    /*width: 75%; /* Could be more or less, depending on screen size */
+    max-width: max-content;
+    min-width: min-content;
 }
 
 /* The Close Button (x) */
@@ -557,4 +571,38 @@ button:hover {
 @keyframes blind-out {
     0% { max-height: 1000px; }
     100% {  max-height:0;  }
+}
+
+.product-item {
+    text-decoration: none;
+    list-style: none;
+}
+
+.editable-list{
+    overflow-y: scroll;
+    list-style: none;
+    text-decoration: none;
+    padding: 0;
+    margin: 0;
+    /*margin-left: 2em;*/
+    max-height: 250px;
+}
+.editable-item{
+    text-align: left;
+    margin: 0.1em 0.1em;
+}
+.editable-label{
+    display: inline-block;
+    width: 80%;
+}
+.editable-button{
+    display: inline-block;
+    width: 20%;
+}
+
+.btn-add:after{
+    content: "+";
+}
+.btn-remove:after{
+    content: "-";
 }

@@ -56,11 +56,12 @@ if( isset( $_POST['remove'] ) )
 <section>
     <?php
     echo "numero prodotti:".count( $_SESSION['carrello'] );
-    foreach ($_SESSION['carrello']as $key => $prodotto) {
+    echo "<table align=center>";
+    foreach ($_SESSION['carrello'] as $key => $prodotto) {
         $id_li = "c_".$key;
-        echo "<li id=".$id_li." value=".$prodotto['id'].">";
-            echo "<table>";
-                echo "<tr>";
+        echo "<tr class=\"product-item\" id=".$id_li." value=".$prodotto['id'].">";
+            // echo "<table>";
+                // echo "<tr>";
                     echo "<td>";
                         echo "<h4 class=\"product-name\">".$prodotto["nome"]."</h4>";
                         if( ( isset( $prodotto["aggiunti"] ) && count( $prodotto["aggiunti"] ) > 0 ) ||
@@ -77,6 +78,9 @@ if( isset( $_POST['remove'] ) )
                                     echo "</ul>";
                                 echo "</div>";
                             }
+                            else{
+                                $_SESSION['carrello'][$key]["aggiunti"] = [];
+                            }
                             if( isset( $prodotto["rimossi"] ) && count( $prodotto["rimossi"] ) > 0 ){
                                 echo "<div class=\"dropdown\">";
                                     echo "<a class=\"dropbtn\">Elementi rimossi</a>";
@@ -87,9 +91,14 @@ if( isset( $_POST['remove'] ) )
                                     echo "</ul>";
                                 echo "</div>";
                             }
+                            else{
+                                $_SESSION['carrello'][$key]["rimossi"] = [];
+                            }
                             echo "</div>";
                         }
-                        echo "<textarea name=\"note\">";
+                    echo "</td>";
+                    echo "<td>";
+                        echo "<textarea name=\"note\" style=\"resize: vertical; box-sizing: inherit;\">";
                         if( isset( $prodotto["note"] ) ){
                             echo $prodotto["note"];
                         }
@@ -102,12 +111,13 @@ if( isset( $_POST['remove'] ) )
                     else{
                         $qta = $prodotto["qta"];
                     }
-                    echo "<td><input type=\"number\" name=quantity value=".$qta." min=1></td>";
+                    echo "<td><input type=\"number\" name=quantity value=".$qta." min=1 style=\"width: 5em;\"></td>";
                     echo "<td><button onclick=\"modificaIngredienti(this, '$id_li')\">Modifica</button></td>";
                     echo "<td><span onclick=\"removeFromCart(this, '$id_li')\" class=\"remove\" title=\"Rimuovi\">&times;</span></td>";
-                echo "</tr>";
-            echo "</table>";
-        echo "</li>";
+                // echo "</tr>";
+            // echo "</table>";
+        echo "</tr>";
     }
+    echo "</table>";
     ?>
 </section>

@@ -1,20 +1,30 @@
 function modificaIngredienti( element, id){
-    var content = "";
-    var div_content = $("<div>");
     
-    var section_current = $("<section>");
-    var section_available = $("<section>");
-    var add_btn = $("<button>");
-    var remove_btn = $("<button>");
-    
-    
-    
-    // $( div_content );
-    var div_modal = createModalForm( content );
-    
+    updateCartElements( undefined, true );
+    var item = $("#"+id);
+    var index = id.split("_")[1];
+    var id_prod = item.attr("value");
+    createModificaIngredientiForm( id_prod, index );
 }
-function addToCart( element, id )
-{
+
+function createModificaIngredientiForm( id_prod, cart_index ){
+    var value = { id: id_prod, index: cart_index };
+    $.ajax(
+    {
+        type: 'post',
+        url: 'forms/modificaIngredientiForm.php',
+        data:
+        {
+            value: JSON.stringify( value )
+        },
+        success: function (response) 
+        {
+            $("#cart_form").find( ".container" ).html( response );
+        }
+    });
+}
+
+function addToCart( element, id ){
     $.ajax(
     {
         type: 'post',
@@ -48,11 +58,10 @@ function removeFromCart( element, id_elem ){
     });   
 }
 
-function updateCart( element, id_elem ){
+function updateCart( element, id_elem, b_only_server){
     var values = id_elem.split("_");
     var index = values[1];
     var info = {};
-    info.ite
     info['id'] = $(element).val();
     info['qta'] = $(element).find( "[name='quantity']" ).val();
     info['note'] = $(element).find( "[name='note']" ).val();
@@ -68,9 +77,21 @@ function updateCart( element, id_elem ){
         },
         success: function (response) 
         {
-            updateCartContent( response, true);
+            if( b_only_server == undefined || b_only_server == false ){
+                updateCartContent( response, true);
+            }
         }
     });   
+}
+
+function updateCartElements( cart, b_only_server){
+    if( cart == undefined ){
+        cart = $("#cart_form");
+    }
+    
+    $(cart).find( ".product-item" ).each( function( index, element ){
+        updateCart( element, $( element ).attr("id"), b_only_server );
+    });
 }
 
 function updateCartContent( html, b_updateonly ){
@@ -83,10 +104,7 @@ function updateCartContent( html, b_updateonly ){
     else{
         div = createModalForm( html );
         $( div ).on('closed', function( event, element, id_elem){
-            $( element ).find( "li" ).each( function( index, element ){
-                updateCart( element, $( element ).attr("id") );
-            });
-            
+            updateCartElements( div );
         });
         $( div ).attr( "id", "cart_form" );
         $( div ).insertAfter( "#menu_filter" );
