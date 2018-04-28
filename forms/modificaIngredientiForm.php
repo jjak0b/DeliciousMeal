@@ -16,7 +16,7 @@
     <section>
     <?php
         $correnti = get_ingredienti_correnti( $connection, $index, $id_product );
-        echo "<ul class=\"editable-list\" name=\"correnti\" size=".count($correnti).">";
+        echo "<ul id=\"correnti\" class=\"editable-list\" name=\"correnti\" size=".count($correnti).">";
         foreach ($correnti as $key => $row) {
             echo "<li class=\"editable-item\" value=".$row['id'].">";
                 echo "<div>";
@@ -39,7 +39,7 @@
     <section>
     <?php
         $disponibili = get_ingredienti_disponibili( $connection, $index, $id_product );
-        echo "<ul class=\"editable-list\" name=\"disponibili\" size=".count($disponibili).">";
+        echo "<ul id=\"disponibili\" class=\"editable-list\" name=\"disponibili\" size=".count($disponibili).">";
         foreach ($disponibili as $key => $row) {
             echo "<li class=\"editable-item\" value=".$row['id'].">";
                 echo "<div>";

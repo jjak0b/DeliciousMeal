@@ -20,8 +20,40 @@ function createModificaIngredientiForm( id_prod, cart_index ){
         success: function (response) 
         {
             $("#cart_form").find( ".container" ).html( response );
+            $("#cart_form").find( ".container" ).find(".editable-item").each( function( index, item ){
+                        // alert(index + " "+ $(item).attr("value") )
+//                 $(item).css("background-color", "blue");
+                var params = { item: item };
+                $( item ).find(".btn-add").each( function( index, btn){
+                    $(btn).css("background-color", "yellowgreen");
+                    $(btn).click( params, addIngrediente );
+                });
+                $( item ).find(".btn-remove").each( function( index, btn ){
+                    $(btn).click( params, removeIngrediente );
+                });
+            });
         }
     });
+}
+
+function addIngrediente( event ){
+    var item = event.data.item;
+    $( this ).removeClass("btn-add");
+    $( this ).addClass("btn-remove");
+    $( item ).appendTo("#correnti");
+    
+    $( this ).unbind( event );
+    $( this ).click( { item: item }, removeIngrediente );
+}
+
+function removeIngrediente( event ){
+    var item = event.data.item;
+    $( this ).removeClass("btn-remove");
+    $( this ).addClass("btn-add");
+    $( item ).appendTo("#disponibili");
+    
+    $( this ).unbind( event );
+    $( this ).click( { item: item }, addIngrediente );
 }
 
 function addToCart( element, id ){
