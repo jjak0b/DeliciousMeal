@@ -1,6 +1,7 @@
 <?php
     include_once('../config.php' );
     include_once("../scripts/utility.php");
+    include_once("../scripts/shared_site.php");
     $value = null;
     if( isset( $_POST['value']))
     {
@@ -34,7 +35,7 @@
     ?>
     </section>
 </div>
-<div style="display: inline-block; vertical-align: left;">
+<div style="display: inline-block; vertical-align: top;">
     <label>Ingredienti Disponibili</label>
     <section>
     <?php
@@ -54,83 +55,10 @@
             echo "</li>";
         }
         echo "</ul>";
+        mysqli_close($connection);
     ?>
     </section>
 </div>
-<?php
-function get_ingredienti_disponibili( $connection, $index, $id_pietanza ){
-    $query_ing_default = quick_select2( array("i.id"),
-                                            array("ingredienti i", "ingredienti_pietanze ip", "pietanze p"),
-                                            array("i.id", "p.id", "p.id"),
-                                            array( "ip.id_ingrediente", "ip.id_pietanza", $id_pietanza) );
-    $query_ing_all = quick_select2( array("i.id", "i.nome", "i.prezzo"),
-                                        array("ingredienti i"),
-                                        null,
-                                        null);
-    $query_ing_available = $query_ing_all." WHERE i.id NOT IN ( $query_ing_default ) ORDER BY i.nome";
-    
-    $result_available = mysqli_query($connection, $query_ing_available );
-    $rows = [];
-    while( $row = mysqli_fetch_assoc($result_available) ){
-        $rows[] = $row;
-    }
-    
-    if( !isset( $_SESSION['carrello'][$index]['aggiunti'] ) ){
-        $_SESSION['carrello'][$index]['aggiunti'] = [];
-    }
-    if( !isset( $_SESSION['carrello'][$index]['rimossi'] ) ){
-        $_SESSION['carrello'][$index]['rimossi'] = [];
-    }
-    
-    // aggiungo agli ingredienti disponbili, quelli rimossi
-    foreach ($_SESSION['carrello'][$index]['rimossi'] as $key => $rimosso) {
-        $rows[] = $rimosso;
-    }
-    
-    // rimuovo dagli ingredienti disponbili, quelli aggiunti
-    foreach ($_SESSION['carrello'][$index]['aggiunti'] as $key => $aggiunto) {
-        foreach ($rows as $index1 => $disponibile) {
-            if($disponibile["id"]==$aggiunto['id']){
-                unset( $rows[$index1] );
-            }
-        }
-    }
-    
-    return array_values($rows);
-}
-
-function get_ingredienti_correnti( $connection, $index, $id_pietanza ){
-    $query_ing_default = quick_select2( array("i.id", "i.nome", "i.prezzo"),
-                                        array("ingredienti i", "ingredienti_pietanze ip", "pietanze p"),
-                                        array("i.id", "p.id", "p.id"),
-                                        array( "ip.id_ingrediente", "ip.id_pietanza", $id_pietanza) );
-    $result_default = mysqli_query($connection, $query_ing_default );
-    $rows = [];
-    while( $row = mysqli_fetch_assoc($result_default) ){
-        $rows[] = $row;
-    }
-    
-    if( !isset( $_SESSION['carrello'][$index]['aggiunti'] ) ){
-        $_SESSION['carrello'][$index]['aggiunti'] = [];
-    }
-    if( !isset( $_SESSION['carrello'][$index]['rimossi'] ) ){
-        $_SESSION['carrello'][$index]['rimossi'] = [];
-    }
-    
-    // aggiungo agli ingredienti correnti, quelli aggiunti
-    foreach ($_SESSION['carrello'][$index]['aggiunti'] as $key => $aggiunto) {
-        $rows[] = $aggiunto;
-    }
-    
-    // rimuovo dagli ingredienti correnti, quelli rimossi
-    foreach ($_SESSION['carrello'][$index]['rimossi'] as $key => $rimosso) {
-        foreach ($rows as $index1 => $corrente) {
-            if($corrente["id"]==$rimosso['id']){
-                unset( $rows[$index1] );
-            }
-        }
-    }
-    
-    return array_values($rows);
-}
-?>
+<div>
+    <button id="submit_changes" style="width: 50%">Conferma Modifiche</button>
+</div>

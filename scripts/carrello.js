@@ -1,6 +1,6 @@
 function modificaIngredienti( element, id){
     
-    updateCartElements( undefined, true );
+    updateCartElements( undefined, true );// salvo le modifiche prima di rimouvere il contenuto nel form.
     var item = $("#"+id);
     var index = id.split("_")[1];
     var id_prod = item.attr("value");
@@ -20,6 +20,7 @@ function createModificaIngredientiForm( id_prod, cart_index ){
         success: function (response) 
         {
             $("#cart_form").find( ".container" ).html( response );
+            $("#cart_form").find( "#submit_changes" ).click( value, submit_changes );
             $("#cart_form").find( ".container" ).find(".editable-item").each( function( index, item ){
                         // alert(index + " "+ $(item).attr("value") )
 //                 $(item).css("background-color", "blue");
@@ -29,11 +30,40 @@ function createModificaIngredientiForm( id_prod, cart_index ){
                     $(btn).click( params, addIngrediente );
                 });
                 $( item ).find(".btn-remove").each( function( index, btn ){
+                    $(btn).css("background-color", "crimson");
                     $(btn).click( params, removeIngrediente );
                 });
             });
         }
     });
+}
+
+function submit_changes( event ){
+    var values = {};
+    values['id'] = event.data.id;
+    values['index'] = event.data.index;
+    values['correnti'] = new Array();
+    $("#correnti").find(".editable-item").each( function( index, element ) {
+        if( jQuery.isNumeric( $( element).val() ) ){
+            values['correnti'].push( $( element).val() );
+        }
+    });
+    
+    $.ajax(
+    {
+        type: 'post',
+        url: 'scripts/carrello.php',
+        data:
+        {
+            action: "set_changes",
+            value: JSON.stringify( values )
+        },
+        success: function (response) 
+        {
+            refreshCart( true );
+        }
+    }
+    );
 }
 
 function addIngrediente( event ){
@@ -57,17 +87,19 @@ function removeIngrediente( event ){
 }
 
 function addToCart( element, id ){
+    var value = { id:id };
     $.ajax(
     {
         type: 'post',
-        url: 'forms/carrelloForm.php',
+        url: 'scripts/carrello.php',
         data:
         {
-            add: id
+            action: "add",
+            value: JSON.stringify( value )
         },
         success: function (response) 
         {
-            updateCartContent( response );
+            refreshCart( false );
         }
     });
 }
@@ -75,26 +107,29 @@ function addToCart( element, id ){
 function removeFromCart( element, id_elem ){
     var values = id_elem.split("_");
     var index = values[1];
+    var value = { index: index };
+    updateCartElements( undefined, true);
     $.ajax(
     {
         type: 'post',
-        url: 'forms/carrelloForm.php',
+        url: 'scripts/carrello.php',
         data:
         {
-            remove: index
+            action: "remove",
+            value: JSON.stringify( value )
         },
         success: function (response) 
         {
-            updateCartContent( response );
+            refreshCart( true );
         }
     });   
 }
-
+// questo è più un salva e aggiorna
 function updateCart( element, id_elem, b_only_server){
     var values = id_elem.split("_");
     var index = values[1];
     var info = {};
-    info['id'] = $(element).val();
+    info['id'] = $(element).attr("value");
     info['qta'] = $(element).find( "[name='quantity']" ).val();
     info['note'] = $(element).find( "[name='note']" ).val();
     var value = { index: index, data: info };
@@ -114,6 +149,21 @@ function updateCart( element, id_elem, b_only_server){
             }
         }
     });   
+}
+// questo è un aggiorna
+function refreshCart( b_updateonly ){
+    $.ajax(
+    {
+        type: 'post',
+        url: 'forms/carrelloForm.php',
+        data:
+        {
+        },
+        success: function (response) 
+        {
+            updateCartContent( response, b_updateonly );
+        }
+    });
 }
 
 function updateCartElements( cart, b_only_server){
@@ -136,7 +186,7 @@ function updateCartContent( html, b_updateonly ){
     else{
         div = createModalForm( html );
         $( div ).on('closed', function( event, element, id_elem){
-            updateCartElements( div );
+            updateCartElements( div, false );
         });
         $( div ).attr( "id", "cart_form" );
         $( div ).insertAfter( "#menu_filter" );
@@ -187,6 +237,45 @@ function createModalForm( content ){
 
 function closeModalForm( event ){
     $(event.data.div).trigger("closed", [ event.data.div, $( event.data.div ).attr( "id" ) ] );
-    $(event.data.div).css( "display", "none" );
-    
+    $(event.data.div).css( "display", "none" );   
 }
+
+function order(){
+    updateCartElements( undefined, false );
+    
+    if( $( "#cart_form" ).find(".container").find(".product-item").length > 0 ){
+        $.ajax(
+        {
+            type: 'post',
+            url: 'scripts/carrello.php',
+            data:
+            {
+                action: "intermission",
+            },
+            success: function (response) 
+            {
+                $( "#cart_form" ).find(".container").html( response );
+                $( "#setTavolo").find("button").click( function( event ){
+                    if( $( "#setTavolo").find("[name='tavolo']").val() > 0 ){
+                        $.ajax(
+                            {
+                                type: 'post',
+                                url: 'scripts/ordine.php',
+                                data:
+                                {
+                                    tavolo: $( "#setTavolo").find("[name='tavolo']").val()
+                                },
+                                success: function (response) 
+                                {
+                                    refreshCart( true );
+                                    alert( response );
+                                }
+                            }
+                        );
+                    }
+                });
+            }   
+        });
+    }
+}
+

@@ -1,23 +1,12 @@
 <?php
 include_once('../config.php' );
 include_once("../scripts/utility.php");
+include_once("../scripts/shared_site.php");
 
-function get_product_info( $connection, $id_value )
-{
-    
-    $query = quick_select2(
-                array("p.id", "p.nome", "p.prezzo", "p.descrizione", "p.categoria", "p.img"),
-                array("pietanze p"),
-                array("p.id"),
-                array( $id_value )
-                );
-    echo $query;
-    $result = mysqli_query($connection, $query);
-    $row = mysqli_fetch_assoc( $result );
-    return $row;
+if( !isset( $connection ) ){
+    $connection = mysqli_connect(HOST, USER, PASSWORD, DB_NAME );
 }
 
-$connection = mysqli_connect(HOST, USER, PASSWORD, DB_NAME );
 // Check connection
 if ( mysqli_connect_errno() )
 {
@@ -28,22 +17,6 @@ if( !isset( $_SESSION['carrello'] ) ){
     $_SESSION['carrello'] = [];
 }
 
-if( isset( $_POST['add'] ) )
-{
-    $p = get_product_info( $connection, $_POST['add'] );
-    $_SESSION['carrello'][] = $p;
-}
-// questo non rimuoverà un id di un prodotto ma un l'indice del carrello
-// perchè ad esempio:
-// ci può essere 1 prodotto con id 1 in quantità 2
-// e ci può essere 1 prodotto con id 1 in quantità 1 con specifici elementi rimossi o aggiunti
-if( isset( $_POST['remove'] ) )
-{
-        // non so se mantenere questo perchè forse salvo il carrello nel database...
-    if( isset( $_SESSION['carrello'][ $_POST['remove'] ] ) ){
-        unset( $_SESSION['carrello'][ $_POST['remove'] ] );
-    }
-}
 /*
  * $_SESSION['carrello'] // array di prodotti ordinati
  * p = $_SESSION['carrello'][i]
@@ -119,5 +92,8 @@ if( isset( $_POST['remove'] ) )
         echo "</tr>";
     }
     echo "</table>";
+    mysqli_close($connection);
+    unset( $connection );
     ?>
+    <button onclick="order()">Ordine ultimato</button>
 </section>

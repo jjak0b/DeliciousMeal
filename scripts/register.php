@@ -41,6 +41,7 @@
     if( $user ){
         $cause = "already_registered";
         echo "<pre>".print_r( $user )."</pre>";
+        mysqli_close($connection);
         header( "location: ../pages/azienda/AreaPersonale.php?login=f&cause=$cause");
     }
     else{
@@ -58,12 +59,15 @@
                         array( $id )
                       );
             $result_register = mysqli_query($connection, $sql_register);*/
-            
+
             $_SESSION['user_login']["id"] = $id;
             $_SESSION['user_login']["nome"] = $name;
             $_SESSION['user_login']["cognome"] = $surname;
             $_SESSION['user_login']["email"] = $email;
             $_SESSION['user_login']["password"] = $password;
+            
+            mysqli_close($connection);
+            
             header( "location: ../pages/azienda/AreaPersonale.php?login=s");
         }
         else{
@@ -73,6 +77,7 @@
             else{
                 $cause = "unknown";
             }
+            mysqli_close($connection);
             header( "location: ../pages/azienda/AreaPersonale.php?login=f&cause=$cause");
         }
     }

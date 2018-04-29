@@ -40,7 +40,7 @@
         $cause = "nouser";
         header( "location: ../pages/azienda/AreaPersonale.php?login=f&cause=$cause");
     }
-    
+    mysqli_close($connection);
     
     
     
