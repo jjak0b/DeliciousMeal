@@ -21,6 +21,7 @@
                         array($email, $password)
                         );
     $connection = mysqli_connect(HOST, USER, PASSWORD, DB_NAME );
+    mysqli_set_charset($connection, "utf8");
     // Check connection
     $user = false;
     $cause = "";

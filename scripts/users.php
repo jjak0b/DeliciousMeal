@@ -3,7 +3,7 @@
     include_once('../config.php' );
 
     $connection = mysqli_connect(HOST, USER, PASSWORD, DB_NAME );
-
+    
     $filter = "";
     if(isset( $_POST['filter'] ) ){
         $filter = $_POST['filter'];

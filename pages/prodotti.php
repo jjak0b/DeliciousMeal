@@ -14,6 +14,7 @@
         <?php
             include_once('../header.php' );
             $connection = mysqli_connect(HOST, USER, PASSWORD, DB_NAME );
+            mysqli_set_charset($connection, "utf8");
             // Check connection
             if ( mysqli_connect_errno() )
             {
@@ -51,9 +52,11 @@
                 </div>
                 <ul class="menu-list">
                 </ul>
-                prova
+                 
                 <ul class="menu-list_t">
                     
+                    <!-- nuovo stile -->
+                    <!--
                     <li class="menu-elem blind-content in">
                         <div class="product-header">
                             <h4 class="product-name">Crostini toscani</h4>
@@ -81,7 +84,9 @@
                                 <button onclick="addToCart(this)" style="width: 100%; display: inline-block;">Ordina</button>
                             </div>
                         </div>
-                    </li>
+                    </li>-->
+                    
+                    <!-- vecchio stile -->
                     <!--
                     <li class="menu-elem">
                         <div style="vertical-align: middle;">
