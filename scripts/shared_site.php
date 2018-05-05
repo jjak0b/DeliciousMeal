@@ -119,3 +119,42 @@ function get_unita( $connection, $id_utente ){
     $row = mysqli_fetch_assoc( $result );
     return $row;
 }
+
+function get_ingredienti_modificati( $connection, $id_prodotto_ordinato, &$array ){
+    if( !isset( $array ) ){
+        $array = array();
+    }
+    $sql_query = quick_select(
+        array("*" ),
+        array("pietanze_modificate pm"),
+        array("pm.id_pietanza_ordinata"),
+        array($id_prodotto_ordinato)
+        );
+    $array['rimossi'] = array();
+    $array['aggiunti'] = array();
+    
+    $result = mysqli_query($connection, $sql_query);
+    while( $row = mysqli_fetch_assoc($result) ){
+        $ingrediente = get_ingrediente( $connection, $row['id_ingrediente'] );
+        if( $row['azione'] == 'a'){
+            $array['aggiunti'][] = $ingrediente;
+        }
+        else if( $row['azione'] == 'r'){
+            $array['rimossi'][] = $ingrediente;
+        }
+    }
+    return $array;
+}
+
+function get_utente( $connection, $id_utente ){
+    $sql_query = quick_select2(
+        array("*" ),
+        array("utenti usr"),
+        array("usr.id" ),
+        array("\"$id_utente\"")
+        );
+    echo $sql_query;
+    $result = mysqli_query($connection, $sql_query);
+    $row = mysqli_fetch_assoc( $result );
+    return $row;
+}

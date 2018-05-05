@@ -15,7 +15,7 @@ function createSection( title, url )
 function onLoad()
 {
     $( "#area_personale" ).append( createSection( "Assegna ruoli", "forms/assignUsersForm.php" ) );
-    // $( "#area_personale" ).append( createSection( "Ordina", "forms/order.php" ) );
+    $( "#area_personale" ).append( createSection( "Visualizza Ordini", "forms/visualizzaOrdniForm.php" ) );
 }
 
 function load_section( event )
