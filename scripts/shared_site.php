@@ -102,7 +102,6 @@ function get_product_info( $connection, $id_value )
                 array("p.id"),
                 array( $id_value )
                 );
-    echo $query;
     $result = mysqli_query($connection, $query);
     $row = mysqli_fetch_assoc( $result );
     return $row;
@@ -153,7 +152,6 @@ function get_utente( $connection, $id_utente ){
         array("usr.id" ),
         array("\"$id_utente\"")
         );
-    echo $sql_query;
     $result = mysqli_query($connection, $sql_query);
     $row = mysqli_fetch_assoc( $result );
     return $row;
