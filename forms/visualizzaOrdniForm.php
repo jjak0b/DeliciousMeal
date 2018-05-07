@@ -73,7 +73,7 @@
                                 echo "<details>";
                                     echo "<summary>clicca per visualizzare</summary>";
                                     echo "<div class=\"left\">";
-                                        echo "<div id=\"section_prodotti\">";
+                                        echo "<div name=\"section_prodotti\">";
                                             echo "<select style=\"width: 100%;\">";
                                             foreach ($ordine['prodotti'] as $key => $prodotto){
                                                 echo "<option value=".$prodotto['id'].">";
@@ -82,39 +82,43 @@
                                             }
                                             echo "</select>";
                                         echo "</div>";
-                                        echo "<div id=\"section_note\">";
+                                        echo "<div name=\"section_note\">";
                                             echo "<textarea disabled></textarea>";
                                         echo "</div>";
                                     echo "</div>";
                                     echo "<div class=\"left\">";
-                                        echo "<div id=\"section_modifiche\" style=\"display: inline-block;\">";
+                                        echo "<div name=\"section_modifiche\" style=\"display: inline-block;\">";
                                             echo "<section style=\"display: inline-block; vertical-align: top;\">";
                                                 echo "<label>Ingredienti aggiunti</label>";
-                                                echo "<ul id=\"aggiunti\" class=\"editable-list\" name=\"aggiunti\">";
-                                                foreach ($prodotto['aggiunti'] as $key => $ingrediente) {
-                                                    echo "<li class=\"editable-item\" value=".$row['id'].">";
-                                                        echo "<div>";
-                                                            echo "<div class=\"editable-label\">";
-                                                                echo "<label>".$ingrediente['nome']."</label>";
+                                                foreach ($ordine['prodotti'] as $key => $prodotto) {
+                                                    echo "<ul class=\"editable-list\" name=\"aggiunti\" value=\"".$prodotto['id']."\" style=\"display: none;\">";
+                                                    foreach ($prodotto['aggiunti'] as $key => $ingrediente) {
+                                                        echo "<li class=\"editable-item\" value=".$row['id'].">";
+                                                            echo "<div>";
+                                                                echo "<div class=\"editable-label\">";
+                                                                    echo "<label>".$ingrediente['nome']."</label>";
+                                                                echo "</div>";
                                                             echo "</div>";
-                                                        echo "</div>";
-                                                    echo "</li>";
+                                                        echo "</li>";
+                                                    }
+                                                    echo "</ul>";
                                                 }
-                                                echo "</ul>";
                                             echo "</section>";
                                             echo "<section style=\"display: inline-block; vertical-align: top;\">";
                                                 echo "<label>Ingredienti rimossi</label>";
-                                                echo "<ul id=\"rimossi\" class=\"editable-list\" name=\"rimossi\">";
-                                                foreach ($prodotto['rimossi'] as $key => $ingrediente) {
-                                                    echo "<li class=\"editable-item\" value=".$row['id'].">";
-                                                        echo "<div>";
-                                                            echo "<div class=\"editable-label\">";
-                                                                echo "<label>".$ingrediente['nome']."</label>";
+                                                foreach ($ordine['prodotti'] as $key => $prodotto) {
+                                                    echo "<ul class=\"editable-list\" name=\"rimossi\" value=\"".$prodotto['id']."\" style=\"display: none;\">";
+                                                    foreach ($prodotto['rimossi'] as $key => $ingrediente) {
+                                                        echo "<li class=\"editable-item\" value=".$row['id'].">";
+                                                            echo "<div>";
+                                                                echo "<div class=\"editable-label\">";
+                                                                    echo "<label>".$ingrediente['nome']."</label>";
+                                                                echo "</div>";
                                                             echo "</div>";
-                                                        echo "</div>";
-                                                    echo "</li>";
+                                                        echo "</li>";
+                                                    }
+                                                    echo "</ul>";
                                                 }
-                                                echo "</ul>";
                                             echo "</section>";
                                         echo "</div>";
                                     echo "</div>";
@@ -135,4 +139,7 @@
             </table>
         </details>
     </div>
+    <script>
+        
+    </script>
 </div>
