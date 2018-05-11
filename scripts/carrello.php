@@ -16,18 +16,20 @@ switch( $action ){
     case "update":
         $index = $value['index'];
         $info = $value['data'];
-        if(!isset( $_SESSION['carrello'][$index]['aggiunti'] ) ){
-            $_SESSION['carrello'][$index]['aggiunti'] = [];
-        }
-        if(!isset( $_SESSION['carrello'][$index]['rimossi'] ) ){
-            $_SESSION['carrello'][$index]['rimossi'] = [];
-        }
-        
-        if( ( isset( $index ) && isset( $info ) )
-            && $_SESSION['carrello'][$index]['id'] == $info['id']
-        ){
-            $_SESSION['carrello'][$index]['qta'] = $info['qta'];
-            $_SESSION['carrello'][$index]['note'] = $info['note'];
+        if( isset( $_SESSION['carrello'][$index] ) ){
+            if(!isset( $_SESSION['carrello'][$index]['aggiunti'] ) ){
+                $_SESSION['carrello'][$index]['aggiunti'] = [];
+            }
+            if(!isset( $_SESSION['carrello'][$index]['rimossi'] ) ){
+                $_SESSION['carrello'][$index]['rimossi'] = [];
+            }
+
+            if( ( isset( $index ) && isset( $info ) )
+                && $_SESSION['carrello'][$index]['id'] == $info['id']
+            ){
+                $_SESSION['carrello'][$index]['qta'] = $info['qta'];
+                $_SESSION['carrello'][$index]['note'] = $info['note'];
+            }
         }
         include_once('../forms/carrelloForm.php');
         break;
@@ -84,6 +86,7 @@ switch( $action ){
         $p = get_product_info( $connection, $value['id'] );
         $p['aggiunti'] = [];
         $p['rimossi'] = [];
+        $_SESSION['carrello'] = array_values( $_SESSION['carrello'] );
         $_SESSION['carrello'][] = $p;
         break;
     case "remove":
@@ -96,6 +99,7 @@ switch( $action ){
         if( isset( $_SESSION['carrello'][ $value['index'] ] ) ){
             unset( $_SESSION['carrello'][ $value['index'] ] );
         }
+        $_SESSION['carrello'] = array_values( $_SESSION['carrello'] );
         break;
     case "intermission":
         if( isset( $_SESSION['user_login'] ) ){

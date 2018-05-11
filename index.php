@@ -10,64 +10,6 @@
             include_once("head.php");
         ?>
     </head>
-    <style>
-/* slider
-----------------------*/
-.slide-wrap {
-    margin: 5% auto 0;
-    width: max-content;
-}
-.slide-mask {
-    position: relative;
-    overflow: hidden;
-    height: 40vmin;
-    width: 75vmin; /*.slide-mask = .slide*/
-}
-.slide-group {
-    position: relative; 
-    width: max-content;
-    height: 100%;
-    padding: 0;
-    margin: 0;
-}
-.slide {
-    color: #fff;
-    text-align: center;
-    display: inline-block;
-    padding: 0;
-    margin: 0;
-    font-size: 0px;
-    width: 75vmin; /*.slide-mask = .slide*/
-    height: 100%;
-}
-
-.slide > img{
-    display: block;
-    width: 100%;
-    height: 100%;
-}
-
-/* nav
-----------------------*/
-.slide-nav {
-    text-align: center;
-}
-.slide-nav ul {
-    margin: 0;
-    padding: 0;
-}
-.slide-nav li {
-    display: inline-block;
-    width: 1em;
-    height: 1em;
-    background: yellowgreen;
-    cursor: pointer;
-    margin-left: .5em;
-}
-.slide-nav li.current {
-    background: crimson;
-}
-    </style>
     <body>
         <?php
             include_once('header.php' );

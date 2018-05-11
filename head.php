@@ -13,6 +13,7 @@
 <link rel="stylesheet" type="text/css" href="style/stile.css">
 <link rel="stylesheet" type="text/css" href="style/jquery-ui.css">
 <link rel="shortcut icon" href="img/logo.png">
-<script src="scripts/navbar.js"></script>
 <script src="ajax/libs/jquery/3.3.1/jquery-3.3.1.js" ></script>
 <script src="ajax/libs/jquery-ui/1.12.1/jquery-ui.js"></script>
+<script src="scripts/js/shared_site.js"></script>
+<script src="scripts/navbar.js"></script>

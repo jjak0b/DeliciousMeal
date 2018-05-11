@@ -32,6 +32,9 @@ if( !isset( $_SESSION['carrello'] ) ){
     echo "<table align=center>";
     foreach ($_SESSION['carrello'] as $key => $prodotto) {
         $id_li = "c_".$key;
+        if( !isset( $prodotto['id'] )){
+            echo "<pre>".print_r( $_SESSION['carrello'] )."</pre>";
+        }
         echo "<tr class=\"product-item\" id=".$id_li." value=".$prodotto['id'].">";
             // echo "<table>";
                 // echo "<tr>";

@@ -14,8 +14,17 @@ function get_pietanze(){
             cat: c,
             filter: filter
         },
+        beforeSend: function(){
+            // inizio loader
+            var loader = createLoader(undefined, "loader");
+            $( ".menu-list" ).css( "display", "none" );
+            $( loader ).insertBefore( ".menu-list" );
+        },
         success: function (response) 
         {
+            $( ".menu-list" ).closest( ".container" ).find( ".loader" ).remove();
+            $( ".menu-list" ).css( "display", "block" );
+            // fine loader
             // alert( "get_ruoli "+ JSON.stringify( values ) +" : " + response );
             $(".menu-list").html( response );
         }

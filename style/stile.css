@@ -487,12 +487,12 @@ button:hover {
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
     margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-    border: 1px solid #888;
+    border: 1px solid transparent;
     /*width: 75%; /* Could be more or less, depending on screen size */
     max-width: max-content;
     min-width: min-content;
+    background-color: whitesmoke;
 }
 
 /* The Close Button (x) */
@@ -605,4 +605,94 @@ button:hover {
 }
 .btn-remove:after{
     content: "-";
+}
+
+/* slider
+----------------------*/
+.slide-wrap {
+    margin: 5% auto 0;
+    width: max-content;
+}
+.slide-mask {
+    position: relative;
+    overflow: hidden;
+    height: 40vmin;
+    width: 75vmin; /*.slide-mask = .slide*/
+}
+.slide-group {
+    position: relative; 
+    width: max-content;
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+.slide {
+    color: #fff;
+    text-align: center;
+    display: inline-block;
+    padding: 0;
+    margin: 0;
+    font-size: 0px;
+    width: 75vmin; /*.slide-mask = .slide*/
+    height: 100%;
+}
+
+.slide > img{
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+/* nav
+----------------------*/
+.slide-nav {
+    text-align: center;
+}
+.slide-nav ul {
+    margin: 0;
+    padding: 0;
+}
+.slide-nav li {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    background: yellowgreen;
+    cursor: pointer;
+    margin-left: .5em;
+}
+.slide-nav li.current {
+    background: crimson;
+}
+
+/*loader*/
+
+.loading:before {
+    border: 5vmin solid yellowgreen;
+    border-radius: 100%;
+    border-top: 5vmin solid crimson;
+    height: 20vmin;
+    width: 20vmin;
+    -webkit-animation: spin 2s linear infinite; /* Safari */
+    animation: spin 2s linear infinite;
+    background-color: whitesmoke;
+    display: inline-block;
+    content: "";
+}
+.loading{
+    display: inline-block;
+}
+.loading-text{
+    text-align: center;
+    font-size: 5vmin;
+}
+
+/* Safari */
+@-webkit-keyframes spin {
+    0% { -webkit-transform: rotate(0deg); }
+    100% { -webkit-transform: rotate(360deg); }
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }

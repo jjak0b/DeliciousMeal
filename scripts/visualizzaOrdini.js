@@ -1,8 +1,14 @@
 $("#workArea").find("[name='section_prodotti']").find("select").each( function(index, element ){
-    $( element ).show_info();
+    element.show_info = show_info;
+    element.show_info();
 });
 $("#workArea").find("[name='section_prodotti']").find("select").change( show_info );
 
+$( "#datepicker" ).datepicker(  {
+                                    dateFormat: 'dd/mm/yy',
+                                    changeMonth: true,
+                                    changeYear: true
+                                });
 function show_info(){
     var p_id;
     var list_aggiunti;
@@ -11,8 +17,9 @@ function show_info(){
     // prendo il l'id del prodotto selezionato
     var section_modifiche = $( this )
             .closest( "details" ) // cerco l'elemento padre più conveniente
-            .find("[name='section_modifiche']");// e cerco il figlkio specifico
+            .find("[name='section_modifiche']");// e cerco il figlio specifico
     p_id = $( this ).find(":selected").attr("value");
+    
     // nascondo tutti gli elementi 
     $( section_modifiche )
             .find("ul[name='aggiunti']")

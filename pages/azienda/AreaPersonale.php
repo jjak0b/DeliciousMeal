@@ -64,7 +64,7 @@
                             echo "</div>";
                         }else{
                             echo "<section>";
-                            echo "sezione sempre presente dopo login per scopo didattico, altrimenti dovrebbe apparire solo se l'utente loggato è stato assegnato alla direzione o risorse umane";
+                                echo "sezione sempre presente dopo login per scopo didattico, altrimenti dovrebbe apparire solo se l'utente loggato è stato assegnato alla direzione o risorse umane";
                             echo "</section>";
                             echo "<script src=\"scripts/area_personale.js\"></script>";
                             echo "<div id=\"workArea\">";

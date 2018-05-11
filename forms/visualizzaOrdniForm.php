@@ -15,6 +15,9 @@
 ?>
 <div>
     <div>
+        <input type="text" id="datepicker">
+    </div>
+    <div>
         <details style="text-align: left; display: block; width: 100%;">
             <summary>Ordini locale</summary>
             <?php

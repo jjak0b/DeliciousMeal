@@ -1,5 +1,5 @@
 function modificaIngredienti( element, id){
-    
+
     updateCartElements( undefined, true );// salvo le modifiche prima di rimouvere il contenuto nel form.
     var item = $("#"+id);
     var index = id.split("_")[1];
@@ -17,8 +17,18 @@ function createModificaIngredientiForm( id_prod, cart_index ){
         {
             value: JSON.stringify( value )
         },
+        beforeSend: function(){
+            // inizio loader
+            var loader = createLoader(undefined, "loader");
+            $( "#cart_form" ).find(".container").css( "display", "none" );
+            $( loader ).insertBefore( $( "#cart_form" ).find(".container") );
+        },
         success: function (response) 
         {
+            $( $( "#cart_form" ).find( ".loader" )[0] ).remove();
+            $( "#cart_form" ).find(".container").css( "display", "block" );
+            // fine loader
+            
             $("#cart_form").find( ".container" ).html( response );
             $("#cart_form").find( "#submit_changes" ).click( value, submit_changes );
             $("#cart_form").find( ".container" ).find(".editable-item").each( function( index, item ){
@@ -118,8 +128,17 @@ function removeFromCart( element, id_elem ){
             action: "remove",
             value: JSON.stringify( value )
         },
+        beforeSend: function(){
+            // inizio loader
+            var loader = createLoader(undefined, "loader");
+            $( "#cart_form" ).find(".container").css( "display", "none" );
+            $( loader ).insertBefore( $( "#cart_form" ).find(".container") );
+        },
         success: function (response) 
         {
+            $( $( "#cart_form" ).find( ".loader" )[0] ).remove();
+            $( "#cart_form" ).find(".container").css( "display", "block" );
+            // fine loader
             refreshCart( true );
         }
     });   
@@ -159,8 +178,17 @@ function refreshCart( b_updateonly ){
         data:
         {
         },
+        beforeSend: function(){
+            // inizio loader
+            var loader = createLoader(undefined, "loader");
+            $( "#cart_form" ).find(".container").css( "display", "none" );
+            $( loader ).insertBefore( $( "#cart_form" ).find(".container") );
+        },
         success: function (response) 
         {
+            $( $( "#cart_form" ).find( ".loader" )[0] ).remove();
+            $( "#cart_form" ).find(".container").css( "display", "block" );
+            // fine loader
             updateCartContent( response, b_updateonly );
         }
     });
@@ -196,50 +224,6 @@ function updateCartContent( html, b_updateonly ){
     }
 }
 
-function createModalForm( content ){
-    var div = $("<div>");
-    var div_content = $("<div>");
-    var div_header = $("<div>");
-    var close_btn = $("<span>");
-    var container = $("<div>");
-    
-    $( div ).append( div_content );
-    $( div_content ).append( container);
-    
-    $( div_header ).append( close_btn );
-    $( div_header ).insertBefore( container );
-    
-    div.addClass( "modal" );
-    div_content.addClass( "modal-content" );
-    div_content.addClass( "animate" );
-    div_header.addClass( "header_container");
-    // div_header.css( "padding-top", "0");
-    // div_header.css( "padding-bottom", "0");
-    // When the user clicks anywhere outside of the modal, close it
-    div.click( {div: div}, function( event ){
-            if ( $( event.target ).is( event.data.div) ){
-                closeModalForm( event );
-            }
-        }
-    );
-    
-    close_btn.html( "&times;");
-    close_btn.attr( "title", "Chiudi");
-    close_btn.addClass("close");
-    close_btn.click( {div: div}, function( event ){
-        closeModalForm( event );
-    });
-    
-    container.addClass( "container" );
-    container.html( content );
-    return div;
-}
-
-function closeModalForm( event ){
-    $(event.data.div).trigger("closed", [ event.data.div, $( event.data.div ).attr( "id" ) ] );
-    $(event.data.div).css( "display", "none" );   
-}
-
 function order(){
     updateCartElements( undefined, false );
     
@@ -252,8 +236,17 @@ function order(){
             {
                 action: "intermission",
             },
+            beforeSend: function(){
+                // inizio loader
+                var loader = createLoader(undefined, "loader");
+                $( "#cart_form" ).find(".container").css( "display", "none" );
+                $( loader ).insertBefore( $( "#cart_form" ).find(".container") );
+            },
             success: function (response) 
             {
+                $( "#cart_form" ).find( ".loader" ).remove();
+                $( "#cart_form" ).find(".container").css( "display", "block" );
+                // fine loader
                 $( "#cart_form" ).find(".container").html( response );
                 $( "#setTavolo").find("button").click( function( event ){
                     if( $( "#setTavolo").find("[name='tavolo']").val() > 0 ){
