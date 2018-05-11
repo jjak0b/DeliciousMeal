@@ -74,9 +74,19 @@
                                     echo "<summary>clicca per visualizzare</summary>";
                                     echo "<div class=\"left\">";
                                         echo "<div name=\"section_prodotti\">";
-                                            echo "<select style=\"width: 100%;\">";
+                                            echo "<select style=\"width: 100%;\"";
+                                            $keys = array_keys( $ordine['prodotti'] );/*
+                                            if( isset( $keys[0] ) ){
+                                                // echo " selected=\"".$ordine['prodotti'][ $keys[0] ]['id']."\"";
+                                            }*/
+                                            echo ">";
                                             foreach ($ordine['prodotti'] as $key => $prodotto){
-                                                echo "<option value=".$prodotto['id'].">";
+                                                echo "<option value=\"".$prodotto['id']."\"";
+                                                if( $keys[0] == $key ){
+                                                    echo " selected='selected'";
+                                                }
+                                                
+                                                echo ">";
                                                     echo $prodotto['nome'];
                                                 echo "</option>";
                                             }
@@ -93,7 +103,7 @@
                                                 foreach ($ordine['prodotti'] as $key => $prodotto) {
                                                     echo "<ul class=\"editable-list\" name=\"aggiunti\" value=\"".$prodotto['id']."\" style=\"display: none;\">";
                                                     foreach ($prodotto['aggiunti'] as $key => $ingrediente) {
-                                                        echo "<li class=\"editable-item\" value=".$row['id'].">";
+                                                        echo "<li class=\"editable-item\" value=".$ingrediente['id'].">";
                                                             echo "<div>";
                                                                 echo "<div class=\"editable-label\">";
                                                                     echo "<label>".$ingrediente['nome']."</label>";
@@ -109,7 +119,7 @@
                                                 foreach ($ordine['prodotti'] as $key => $prodotto) {
                                                     echo "<ul class=\"editable-list\" name=\"rimossi\" value=\"".$prodotto['id']."\" style=\"display: none;\">";
                                                     foreach ($prodotto['rimossi'] as $key => $ingrediente) {
-                                                        echo "<li class=\"editable-item\" value=".$row['id'].">";
+                                                        echo "<li class=\"editable-item\" value=".$ingrediente['id'].">";
                                                             echo "<div>";
                                                                 echo "<div class=\"editable-label\">";
                                                                     echo "<label>".$ingrediente['nome']."</label>";
@@ -139,7 +149,5 @@
             </table>
         </details>
     </div>
-    <script>
-        
-    </script>
+    <script src="scripts/visualizzaOrdini.js"></script>
 </div>
