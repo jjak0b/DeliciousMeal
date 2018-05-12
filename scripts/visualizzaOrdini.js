@@ -1,40 +1,109 @@
-$("#workArea").find("[name='section_prodotti']").find("select").each( function(index, element ){
-    element.show_info = show_info;
-    element.show_info();
-});
-$("#workArea").find("[name='section_prodotti']").find("select").change( show_info );
-
-$( "#datepicker" ).datepicker(  {
-                                    beforeShowDay: getDateOrders,
-                                    dateFormat: 'dd/mm/yy',
-                                    changeMonth: true,
-                                    changeYear: true
-                                });
-$( document ).ready(function() {
+var dateOrders;
+$( "#datepicker" ).ready(function() {
+    $( "#datepicker" ).datepicker(  {
+        // aggiorna la lista delle date relative agli ordini
+        beforeShow: updateDateOrders,
+        // rende selezionabili solo le date con degli ordini
+        beforeShowDay: checkDateOrders,
+        // aggiorna la lista ordini
+        onSelect: onDateSelected,
+        dateFormat: 'dd/mm/yy',
+        changeMonth: true,
+        changeYear: true
+    });
+    $( "#datepicker" ).change( onDateChanged );
     $('#datepicker').datepicker("setDate", new Date());
+    $( "#datepicker" ).trigger("change");// genero l'evento manualmente
 });
 
-function getDateOrders(date) {
+function updateDateOrders( input, inst ){
     var ajaxObj = $.ajax(
     {
         type: 'post',
         url: 'scripts/ordine.php',
+        // mi serve sia sincronizzata per recuperare
+        // e salvare in una variabile globale i dati ricevuti
         async: false,
         data:
         {
             action: "get_dates_orders",
         }
     } );
-        
-    var response = ajaxObj.responseText;
-    var availableDates = JSON.parse( response );
-    var dmy = $.datepicker.formatDate("yy-mm-dd", date);
-    if ($.inArray(dmy, availableDates) != -1) {
+    dateOrders = JSON.parse( ajaxObj.responseText );
+}
+
+function checkDateOrders(date) {
+    var mydate = $.datepicker.formatDate("yy-mm-dd", date);
+    if ($.inArray(mydate, dateOrders) != -1) {
         return [true, "","Disponibile"];
     }
     else {
         return [false,"","Non disponibile"];
     }
+}
+
+function onDateSelected( dateText, inst ){
+    onDateChanged( undefined );
+}
+
+function onDateChanged( event ){
+    var value = {};
+    value['date'] = $.datepicker.formatDate("yy-mm-dd", $("#datepicker").datepicker( 'getDate' ) );
+    value = JSON.stringify(value);
+    updateLists( value );
+}
+
+function updateLists( value ){
+    // ordini locale
+    $.ajax(
+    {
+        type: 'post',
+        url: 'forms/visualizzaOrdiniForm/ordini_locale.php',
+        data:
+        {
+            value: value
+        },
+        success: function (response) 
+        {
+            $("#ordini_locale").html( response );
+            $("#ordini_locale")
+                    .find("[name='section_prodotti']")
+                    .find("select")
+                    .each( function(index, element ){
+                        $( element ).change( show_info );
+                        if( element.show_info == undefined ){
+                            element.show_info = show_info;
+                        }
+                        element.show_info();
+                    });
+        }
+    });
+    
+    // ordini domicilio
+    $.ajax(
+    {
+        type: 'post',
+        url: 'forms/visualizzaOrdiniForm/ordini_domicilio.php',
+        data:
+        {
+            value: value
+        },
+        success: function (response) 
+        {
+            $("#ordini_domicilio").html( response );
+            $("#ordini_domicilio")
+                    .find("[name='section_prodotti']")
+                    .find("select")
+                    .each( function(index, element ){
+                        $( element ).change( show_info );
+                        if( element.show_info == undefined ){
+                            element.show_info = show_info;
+                        }
+                        element.show_info();
+                    });
+            // $("#workArea").find("[name='section_prodotti']").find("select")
+        }
+    });
 }
 
 function show_info(){

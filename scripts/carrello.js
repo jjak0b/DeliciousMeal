@@ -234,7 +234,7 @@ function order(){
             url: 'scripts/carrello.php',
             data:
             {
-                action: "intermission",
+                action: "intermission"
             },
             beforeSend: function(){
                 // inizio loader
@@ -242,12 +242,15 @@ function order(){
                 $( "#cart_form" ).find(".container").css( "display", "none" );
                 $( loader ).insertBefore( $( "#cart_form" ).find(".container") );
             },
-            success: function (response) 
+            error: function (jqXHR, textStatus, errorThrown) {
+                alert("Errore di connessione, riprovare");
+            },
+            success: function (response_a) 
             {
                 $( "#cart_form" ).find( ".loader" ).remove();
                 $( "#cart_form" ).find(".container").css( "display", "block" );
                 // fine loader
-                $( "#cart_form" ).find(".container").html( response );
+                $( "#cart_form" ).find(".container").html( response_a );
                 $( "#setTavolo").find("button").click( function( event ){
                     if( $( "#setTavolo").find("[name='tavolo']").val() > 0 ){
                         $.ajax(
@@ -259,10 +262,10 @@ function order(){
                                     action: "register",
                                     value: JSON.stringify( { tavolo: $( "#setTavolo").find("[name='tavolo']").val() } )
                                 },
-                                success: function (response) 
+                                success: function (response_b) 
                                 {
                                     refreshCart( true );
-                                    alert( response );
+                                    alert( response_b );
                                 }
                             }
                         );

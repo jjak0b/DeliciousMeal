@@ -1,7 +1,7 @@
 <?php
-    include_once('../config.php' );
-    include_once('../scripts/utility.php' );
-    include_once('../scripts/shared_site.php' );
+    include_once('../../config.php' );
+    include_once('../../scripts/utility.php' );
+    include_once('../../scripts/shared_site.php' );
     
     if( !isset( $connection ) ){
         $connection = mysqli_connect(HOST, USER, PASSWORD, DB_NAME );
@@ -18,13 +18,8 @@
         $value = json_decode($_POST['value'], true);
     }
 ?>
-<div>
-    <div id="filter_order">
-        <input type="text" id="datepicker">
-    </div>
-    <div id="ordini_locale">
-    </div>
-    <div id="ordini_domicilio">
-    </div>
-    <script src="scripts/visualizzaOrdini.js"></script>
-</div>
+<details style="text-align: left; display: block; width: 100%;">
+    <summary>Ordini a domicilio</summary>
+    <table>
+    </table>
+</details>
