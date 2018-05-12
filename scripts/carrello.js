@@ -256,7 +256,8 @@ function order(){
                                 url: 'scripts/ordine.php',
                                 data:
                                 {
-                                    tavolo: $( "#setTavolo").find("[name='tavolo']").val()
+                                    action: "register",
+                                    value: JSON.stringify( { tavolo: $( "#setTavolo").find("[name='tavolo']").val() } )
                                 },
                                 success: function (response) 
                                 {

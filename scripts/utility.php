@@ -103,7 +103,9 @@
                 return $query;
             }
             
-            // costruisce una select semplice avendo i parametri settati, le condizioni vengono fatte in ugualianza in sequenza tra i $attributes e $values nello stesso indice
+            // costruisce una select semplice avendo i parametri settati,
+            // le condizioni vengono fatte in ugualianza
+            // in sequenza tra i $attributes e $values nello stesso indice
             function quick_select( $select_list, $table_list, $attributes, $values)
             {
                 $query = "SELECT ";

@@ -5,10 +5,38 @@ $("#workArea").find("[name='section_prodotti']").find("select").each( function(i
 $("#workArea").find("[name='section_prodotti']").find("select").change( show_info );
 
 $( "#datepicker" ).datepicker(  {
+                                    beforeShowDay: getDateOrders,
                                     dateFormat: 'dd/mm/yy',
                                     changeMonth: true,
                                     changeYear: true
                                 });
+$( document ).ready(function() {
+    $('#datepicker').datepicker("setDate", new Date());
+});
+
+function getDateOrders(date) {
+    var ajaxObj = $.ajax(
+    {
+        type: 'post',
+        url: 'scripts/ordine.php',
+        async: false,
+        data:
+        {
+            action: "get_dates_orders",
+        }
+    } );
+        
+    var response = ajaxObj.responseText;
+    var availableDates = JSON.parse( response );
+    var dmy = $.datepicker.formatDate("yy-mm-dd", date);
+    if ($.inArray(dmy, availableDates) != -1) {
+        return [true, "","Disponibile"];
+    }
+    else {
+        return [false,"","Non disponibile"];
+    }
+}
+
 function show_info(){
     var p_id;
     var list_aggiunti;
