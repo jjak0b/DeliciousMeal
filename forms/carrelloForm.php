@@ -32,53 +32,53 @@ if( !isset( $_SESSION['carrello'] ) ){
     echo "<table align=center>";
     foreach ($_SESSION['carrello'] as $key => $prodotto) {
         $id_li = "c_".$key;
-        if( !isset( $prodotto['id'] )){
-            echo "<pre>".print_r( $_SESSION['carrello'] )."</pre>";
-        }
         echo "<tr class=\"product-item\" id=".$id_li." value=".$prodotto['id'].">";
             // echo "<table>";
                 // echo "<tr>";
                     echo "<td>";
                         echo "<h4 class=\"product-name\">".$prodotto["nome"]."</h4>";
-                        if( ( isset( $prodotto["aggiunti"] ) && count( $prodotto["aggiunti"] ) > 0 ) ||
-                            ( isset( $prodotto["rimossi"] ) && count( $prodotto["rimossi"] ) > 0 ) )
-                        {
-                            echo "<div>";
-                            if( isset( $prodotto["aggiunti"] ) && count( $prodotto["aggiunti"] ) > 0 ){
-                                echo "<div class=\"dropdown\">";
-                                    echo "<a class=\"dropbtn\">Elementi aggiunti</a>";
-                                    echo "<ul class=\"dropdown-content\" style=\"top: 0; right: 100%; background-color:whitesmoke\">";
-                                        foreach ( $prodotto["aggiunti"] as $key_p => $ingrediente ) {
-                                            echo "<li class=\"field ingrediente\">".$ingrediente['nome']."</li>";
-                                        }
-                                    echo "</ul>";
-                                echo "</div>";
-                            }
-                            else{
-                                $_SESSION['carrello'][$key]["aggiunti"] = [];
-                            }
-                            if( isset( $prodotto["rimossi"] ) && count( $prodotto["rimossi"] ) > 0 ){
-                                echo "<div class=\"dropdown\">";
-                                    echo "<a class=\"dropbtn\">Elementi rimossi</a>";
-                                    echo "<ul class=\"dropdown-content\" style=\"top: 0; right: 100%; background-color:whitesmoke\">";
-                                        foreach ($prodotto["rimossi"] as $key_p => $ingrediente) {
-                                            echo "<li class=\"field ingrediente\">".$ingrediente['nome']."</li>";
-                                        }
-                                    echo "</ul>";
-                                echo "</div>";
-                            }
-                            else{
-                                $_SESSION['carrello'][$key]["rimossi"] = [];
-                            }
-                            echo "</div>";
-                        }
                     echo "</td>";
                     echo "<td>";
-                        echo "<textarea name=\"note\" style=\"resize: vertical; box-sizing: inherit;\">";
+                    echo "<details>";
+                        echo "<summary>Note aggiuntive</summary>";
+                        echo "<textarea name=\"note\" placeholder=\"scrivi eventuali allergie, modifiche o aggiunte non diponibili sul sito, e altro ...\" style=\"resize: vertical; box-sizing: inherit;\">";
                         if( isset( $prodotto["note"] ) ){
                             echo $prodotto["note"];
                         }
                         echo "</textarea>";
+                    echo "</details>";
+                    if( ( isset( $prodotto["aggiunti"] ) && count( $prodotto["aggiunti"] ) > 0 ) ||
+                            ( isset( $prodotto["rimossi"] ) && count( $prodotto["rimossi"] ) > 0 ) )
+                    {
+                        echo "<div>";
+                        if( isset( $prodotto["aggiunti"] ) && count( $prodotto["aggiunti"] ) > 0 ){
+                            echo "<div class=\"dropdown\">";
+                                echo "<a class=\"dropbtn\">Elementi aggiunti</a>";
+                                echo "<ul class=\"dropdown-content\" style=\"top: 0; right: 100%; background-color:whitesmoke\">";
+                                    foreach ( $prodotto["aggiunti"] as $key_p => $ingrediente ) {
+                                        echo "<li class=\"field ingrediente\">".$ingrediente['nome']."</li>";
+                                    }
+                                echo "</ul>";
+                            echo "</div>";
+                        }
+                        else{
+                            $_SESSION['carrello'][$key]["aggiunti"] = [];
+                        }
+                        if( isset( $prodotto["rimossi"] ) && count( $prodotto["rimossi"] ) > 0 ){
+                            echo "<div class=\"dropdown\">";
+                                echo "<a class=\"dropbtn\">Elementi rimossi</a>";
+                                echo "<ul class=\"dropdown-content\" style=\"top: 0; right: 100%; background-color:whitesmoke\">";
+                                    foreach ($prodotto["rimossi"] as $key_p => $ingrediente) {
+                                        echo "<li class=\"field ingrediente\">".$ingrediente['nome']."</li>";
+                                    }
+                                echo "</ul>";
+                            echo "</div>";
+                        }
+                        else{
+                            $_SESSION['carrello'][$key]["rimossi"] = [];
+                        }
+                        echo "</div>";
+                    }
                     echo "</td>";
                     $qta = 1;
                     if( !isset( $prodotto["qta"] ) ){
@@ -87,7 +87,7 @@ if( !isset( $_SESSION['carrello'] ) ){
                     else{
                         $qta = $prodotto["qta"];
                     }
-                    echo "<td><input type=\"number\" name=quantity value=".$qta." min=1 style=\"width: 5em;\"></td>";
+                    echo "<td><input type=\"number\" name=quantity value=".$qta." min=1></td>";
                     echo "<td><button onclick=\"modificaIngredienti(this, '$id_li')\">Modifica</button></td>";
                     echo "<td><span onclick=\"removeFromCart(this, '$id_li')\" class=\"remove\" title=\"Rimuovi\">&times;</span></td>";
                 // echo "</tr>";

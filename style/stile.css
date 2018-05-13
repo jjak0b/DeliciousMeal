@@ -95,8 +95,7 @@ div.main {
 }
 .navbar {
     background-color: crimson;
-    margin: 0 0 0 0;
-    padding: 10px;
+    margin: 0;
     padding-bottom: 0;
     height: max-content;
     font-size: 2.5em;
@@ -111,6 +110,7 @@ div.main {
 /*menu*/
 .navbar > .dropdown{ 
     display: inline-block;
+    text-align: left;
 }
 /*submenu*/
 .dropdown-content > .dropdown{
@@ -125,6 +125,7 @@ div.main {
     border: none;
     cursor: pointer;   
     text-decoration: none;
+    width: 100%;
 }
 /*menu*/
 .dropdown > .dropdown-content {
@@ -441,14 +442,29 @@ ul.tree ul li {
 /*Login*/
 
 /* Full-width inputs */
-input {
-    width: 100%;
+select,
+input,
+textarea
+{
+    /*width: 100%;*/
     padding: 0.8em 1em;
     margin: 1em 0;
     display: inline-block;
-    box-sizing: border-box;
+    text-align: center;
 }
 
+input[type=number] {
+    width: 3em;
+}
+
+textarea {
+    resize: vertical;
+    text-align: justify;
+}
+
+details{
+    width: max-content;
+}
 /* Set a style for all buttons */
 button {
     background-color: crimson;
@@ -458,6 +474,20 @@ button {
     cursor: pointer;
     width: 100%;
     min-width: max-content;
+}
+
+.form-section{
+    display: block;
+    font-size: 0.8em;
+    text-align: center;
+}
+
+.form-field{
+    vertical-align: middle;
+    text-align: center;
+    display: inline-block;
+    min-width: max-content;
+    width: calc( 50% - 2em);
 }
 
 /* Add a hover effect for buttons */
@@ -487,7 +517,7 @@ button:hover {
 
 /* Modal Content/Box */
 .modal-content {
-    margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+    margin: 1% auto;
     border: 1px solid transparent;
     /*width: 75%; /* Could be more or less, depending on screen size */
     max-width: max-content;
@@ -695,4 +725,10 @@ button:hover {
 @keyframes spin {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+/*resetta alcune regole impostate per altri elementi*/
+.ui-datepicker > *{
+    width: inherit;
+    padding: inherit;
+    margin: inherit;
 }

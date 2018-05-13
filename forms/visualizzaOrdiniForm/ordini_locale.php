@@ -23,7 +23,7 @@
     <?php
         $tavolo;
         $id_utente;
-        $query_ordini_locale = "SELECT ol.id as id_ordine, ol.tavolo, o.id_utente
+        $query_ordini_locale = "SELECT ol.id as id_ordine, ol.tavolo, o.id_utente, o.data
                                 FROM ordini_locale ol, ordini o
                                 WHERE ol.id = o.id";
         if( isset( $id_utente ) ){
@@ -69,6 +69,7 @@
                 <th>ID ORDINE</th>
                 <th>ID UTENTE</th>
                 <th>TAVOLO</th>
+                <th>ORARIO</th>
                 <th>INFO UTENTE</th>
                 <th>DETTAGLI ORDINE</th>
             </tr>
@@ -78,6 +79,7 @@
                         echo "<td>".$ordine["id_ordine"]."</td>";
                         echo "<td>".$ordine["id_utente"]."</td>";
                         echo "<td>".$ordine["tavolo"]."</td>";
+                        echo "<td>".explode(" ", $ordine["data"])[1]."</td>";
                         $utente = get_utente( $connection, $ordine["id_utente"] );
                         echo "<td>".$utente['cognome']." ".$utente['nome']."</td>";
                         echo "<td>";
@@ -85,6 +87,7 @@
                             echo "<summary>clicca per visualizzare</summary>";
                             echo "<div class=\"left\">";
                                 echo "<div name=\"section_prodotti\">";
+                                    echo "<label>Prodotti richiesti</label>";
                                     echo "<select style=\"width: 100%;\"";
                                     $keys = array_keys( $ordine['prodotti'] );/*
                                     if( isset( $keys[0] ) ){
@@ -104,7 +107,20 @@
                                     echo "</select>";
                                 echo "</div>";
                                 echo "<div name=\"section_note\">";
-                                    echo "<textarea disabled></textarea>";
+                                echo "<label>Note aggiuntive</label>";
+                                foreach ($ordine['prodotti'] as $key => $prodotto) {
+                                    echo "<textarea disabled value=\"".$prodotto['id']."\"style=\"min-width: 100%;max-width: 100%; display: none;\">".$prodotto['note']."</textarea>";
+                                }
+                                echo "</div>";
+                            echo "</div>";
+                            echo "<div class=\"left\">";
+                                echo "<label>Quantit&agrave;</label>";
+                                echo "<div name=\"section_quantita\">";
+                                foreach ($ordine['prodotti'] as $key => $prodotto) {
+                                    echo "<li value=\"".$prodotto['id']."\" style=\"display: none;\">";
+                                        echo "<input disabled type='number' value=\"".$prodotto['quantita']."\">";
+                                    echo "</li>";
+                                }
                                 echo "</div>";
                             echo "</div>";
                             echo "<div class=\"left\">";

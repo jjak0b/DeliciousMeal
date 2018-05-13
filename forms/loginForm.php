@@ -4,21 +4,23 @@
     </div>
 
     <div class="container">
-        <label><b>Email</b></label>
-        <input type="email" placeholder="Inserisci la tua email" name="email" required>
+        <div class="center">
+            <div class="form-section"> 
+                <label class="form-field"><b>Email</b></label>
+                <input class="form-field" type="email" name="email" required placeholder="Inserisci la tua email"  >
+            </div>
+            <div class="form-section">
+                <label class="form-field"><b>Password</b></label>
+                <input class="form-field" name="password" type="password" required placeholder="Inserisci la tua Password" >
+            </div>
 
-        <label><b>Password</b></label>
-        <input type="password" placeholder="Inserisci la tua Password" name="password" required>
-
-        <!--<label>Ricorda credenziali
-            <input type=\"checkbox\" checked=\"checked\" name=\"remember\" style=\"width: auto;\">
-        </label>-->
-
-        <button type="submit">Accedi</button>
+            <button type="submit">Accedi</button>
+        </div>
     </div>
-
-    <div class="container center">
-        <label>Non hai un account?</label>
-        <button onclick="registerSection(this)" type="button" style="width:50%;"<b>Registrati</b></button>
+    <div class="container">
+        <div class="form-section">
+            <label class="form-field">Non hai un account?</label>
+            <button class="form-field" onclick="registerSection(this)" type="button" style="width:50%;"<b>Registrati</b></button>
+        </div>
     </div>
 </form>

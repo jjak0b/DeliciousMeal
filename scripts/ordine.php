@@ -120,8 +120,7 @@ if( isset( $_SESSION['user_login'] ) && $connection && isset( $action )){
             $result_date = mysqli_query($connection, $query_date);
             $date = array();
             while( $row = mysqli_fetch_assoc( $result_date ) ){
-                $d = explode(" ", $row['data'] );// separo data e ora
-                $date[] = $d[0];
+                $date[] = explode(" ", $row['data'] );
             }
             echo json_encode( $date );
             break;

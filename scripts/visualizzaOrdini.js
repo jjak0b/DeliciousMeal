@@ -110,12 +110,22 @@ function show_info(){
     var p_id;
     var list_aggiunti;
     var list_rimossi;
+    var list_quantita;
+    var list_note;
     
     // prendo il l'id del prodotto selezionato
     var section_modifiche = $( this )
             .closest( "details" ) // cerco l'elemento padre più conveniente
             .find("[name='section_modifiche']");// e cerco il figlio specifico
     p_id = $( this ).find(":selected").attr("value");
+    
+    var section_quantita = $( this )
+            .closest( "details" ) // cerco l'elemento padre più conveniente
+            .find("[name='section_quantita']");// e cerco il figlio specifico
+
+    var section_note = $( this )
+            .closest( "details" ) // cerco l'elemento padre più conveniente
+            .find("[name='section_note']");// e cerco il figlio specifico
     
     // nascondo tutti gli elementi 
     $( section_modifiche )
@@ -125,6 +135,18 @@ function show_info(){
     });
     $( section_modifiche )
             .find("ul[name='rimossi']")
+            .each( function( index, element){
+                $(element).css("display", "none");
+    });
+    
+    $( section_quantita )
+            .find("li")
+            .each( function( index, element){
+                $(element).css("display", "none");
+    });
+    
+    $( section_note )
+            .find("textarea")
             .each( function( index, element){
                 $(element).css("display", "none");
     });
@@ -146,7 +168,24 @@ function show_info(){
                 }
             });
             
+    $( section_quantita )
+            .find( "li" )
+            .each( function( index_li, li ){
+                if( $( li ).attr( "value" ) == p_id ){
+                    list_quantita = li;
+                }
+            });
+    $( section_note )
+            .find("textarea")
+            .each( function( index, element ){
+                if( $( element ).attr( "value" ) == p_id ){
+                    list_note = element;
+                }
+            });
+    
     // rendo visibili le ul
     $( list_aggiunti ).css( "display", "block" );
     $( list_rimossi ).css( "display", "block" );
+    $( list_quantita ).css( "display", "block" );
+    $( list_note ).css( "display", "block" );
 }

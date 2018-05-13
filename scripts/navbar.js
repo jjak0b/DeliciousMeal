@@ -134,7 +134,7 @@ function setup_menu( menudiv ){
 
     
     var navbar = new Navbar("navbar");
-    
+    navbar.node.classList.add("center");
     navbar.addMenu( menu );
     navbar.addMenu( menu1 );
     navbar.addMenu( menu2 );

@@ -25,7 +25,7 @@
             <div class="container">
                 <div class="center">
                     <form id=menu_filter >
-                        <select id="categoria" style="max-width: 40%;">
+                        <select id="categoria">
                             <?php
                                 $query_categorie = quick_select(
                                         array("c.id", "c.nome", "c.descrizione"),
@@ -46,7 +46,7 @@
                                 }
                             ?>
                         </select>
-                        <input id="filter" type="search" placeholder="Cerca un piatto nella categoria selezionata" style="max-width: 40%">
+                        <input id="filter" type="search" placeholder="Cerca un piatto nella categoria selezionata">
                         
                     </form>
                 </div>
