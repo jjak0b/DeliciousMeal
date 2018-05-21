@@ -3,6 +3,18 @@
     Author     : jacopo.rimediotti
     description: foglio di stile molto incasinato
 */
+.table-orders{
+    border-collapse: collapse;
+}
+.table-header {
+    background-color: yellowgreen;
+}
+.table-row > td,
+.table-row > th {
+    padding: 0.2em;
+    text-align: center;
+}
+
 
 .left {
     float: left;

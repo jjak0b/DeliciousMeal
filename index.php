@@ -36,6 +36,7 @@
         <div class="main">
             <div class="container">
                 <div class="slide-wrap">
+                    <h2 class="center">I nostri 5 prodotti più apprezzati:</h2>
                     <div class="slide-mask">
                       <ul class="slide-group">
                         <?php

@@ -123,7 +123,7 @@ switch( $action ){
                 echo "</div>";
             }
             else{
-                // form indirizzo
+                include_once( "../forms/infoDomicilioForm.php");
             }
         }
         else{

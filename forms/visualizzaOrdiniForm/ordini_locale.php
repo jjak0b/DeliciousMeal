@@ -64,8 +64,8 @@
         }
     ?>
     <div>
-        <table>
-            <tr>
+        <table class="table-orders">
+            <tr class="table-row table-header">
                 <th>ID ORDINE</th>
                 <th>ID UTENTE</th>
                 <th>TAVOLO</th>
@@ -75,7 +75,7 @@
             </tr>
                 <?php
                 foreach ( $ordini_locale as $key => $ordine ) {
-                    echo "<tr>";
+                    echo "<tr class=\"table-row\">";
                         echo "<td>".$ordine["id_ordine"]."</td>";
                         echo "<td>".$ordine["id_utente"]."</td>";
                         echo "<td>".$ordine["tavolo"]."</td>";
@@ -84,7 +84,7 @@
                         echo "<td>".$utente['cognome']." ".$utente['nome']."</td>";
                         echo "<td>";
                         echo "<details>";
-                            echo "<summary>clicca per visualizzare</summary>";
+                            echo "<summary>Clicca per visualizzare</summary>";
                             echo "<div class=\"left\">";
                                 echo "<div name=\"section_prodotti\">";
                                     echo "<label>Prodotti richiesti</label>";

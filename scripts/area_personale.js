@@ -15,7 +15,7 @@ function createSection( title, url )
 function onLoad()
 {
     $( createSection( "Assegna ruoli", "forms/assignUsersForm.php" ) ).insertBefore("#workArea");
-    $( createSection( "Visualizza Ordini", "forms/visualizzaOrdniForm.php" ) ).insertBefore("#workArea");
+    $( createSection( "Visualizza Ordini", "forms/visualizzaOrdiniForm.php" ) ).insertBefore("#workArea");
 }
 
 function load_section( event )

@@ -17,7 +17,9 @@ if( isset( $_POST['action'] ) ){
 if( isset( $_POST['value'] ) ){
     $value = json_decode($_POST['value'], true);
 }
-if( isset( $_SESSION['user_login'] ) && $connection && isset( $action )){
+if( isset( $_SESSION['user_login'] )
+        && $connection
+        /*&& isset( $action )*/ ){
     
     switch( $action ){
         case "register":
@@ -35,21 +37,24 @@ if( isset( $_SESSION['user_login'] ) && $connection && isset( $action )){
                         array("id", "tavolo" ),
                         array($id_ordine, $value['tavolo'] ));
             }
-            else if( isset( $value['indirizzo'] )
-                    && isset( $value['citta'] )
-                    && isset( $value['comune'] ) ){
+            else if( isset( $_POST['indirizzo'] )
+                    && isset( $_POST['citta'] )
+                    && isset( $_POST['comune'] ) ){
+                $giorno_consegna = $_POST['giorno']." ".$_POST["ora"];
                 $sql_ordine_tipo = insert(
                         "ordini_domicilo",
                         array(
                             "id",
                             "indirizzo",
                             "citta",
-                            "comune" ),
+                            "comune" ,
+                            "giorno_consegna"),
                         array(
                             $id_ordine,
                             $_POST['indirizzo'],
                             $_POST['citta'],
-                            $_POST['comune'] ));
+                            $_POST['comune'],
+                            $giorno_consegna));
             }
             $result_ordine_tipo = mysqli_query($connection, $sql_ordine_tipo );
 
@@ -120,7 +125,7 @@ if( isset( $_SESSION['user_login'] ) && $connection && isset( $action )){
             $result_date = mysqli_query($connection, $query_date);
             $date = array();
             while( $row = mysqli_fetch_assoc( $result_date ) ){
-                $date[] = explode(" ", $row['data'] );
+                $date[] = explode(" ", $row['data'] )[0];
             }
             echo json_encode( $date );
             break;
