@@ -110,20 +110,10 @@ switch( $action ){
              */
             // if( isset( $unita ) && $unita && $unita['id'] == 9 ){
             if( isset( $unita ) ){// temp
-                echo "<div id=\"setTavolo\">";
-                    echo "<div>";
-                        echo "<label>Inserisci numero tavolo<label>";
-                    echo "</div>";
-                    echo "<div>";
-                        echo "<input required type=number name=tavolo min=\"1\">";
-                    echo "</div>";
-                    echo "<div>";
-                        echo "<button>Conferma</button>";
-                    echo "</div>";
-                echo "</div>";
+                include_once("../forms/InfoOrdine/InfoLocaleForm.php");
             }
             else{
-                include_once( "../forms/infoDomicilioForm.php");
+                include_once("../forms/InfoOrdine/InfoDomicilioForm.php");
             }
         }
         else{

@@ -19,7 +19,7 @@ if( isset( $_POST['value'] ) ){
 }
 if( isset( $_SESSION['user_login'] )
         && $connection
-        /*&& isset( $action )*/ ){
+        && isset( $action ) ){
     
     switch( $action ){
         case "register":
@@ -37,12 +37,18 @@ if( isset( $_SESSION['user_login'] )
                         array("id", "tavolo" ),
                         array($id_ordine, $value['tavolo'] ));
             }
-            else if( isset( $_POST['indirizzo'] )
-                    && isset( $_POST['citta'] )
-                    && isset( $_POST['comune'] ) ){
-                $giorno_consegna = $_POST['giorno']." ".$_POST["ora"];
+            else if( isset( $value['indirizzo'] )
+                    && isset( $value['citta'] )
+                    && isset( $value['comune'] ) 
+                    && isset( $value['giorno'])
+                    && isset( $value['ora'])){
+                
+                $giorno = explode("-", $value['giorno'] );
+                // inverto la data per formato richiesto dal DB
+                $giorno_consegna =  $giorno[2]."-".$giorno[1]."-".$giorno[0]
+                                    ." ".$value["ora"];
                 $sql_ordine_tipo = insert(
-                        "ordini_domicilo",
+                        "ordini_domicilio",
                         array(
                             "id",
                             "indirizzo",
@@ -51,9 +57,9 @@ if( isset( $_SESSION['user_login'] )
                             "giorno_consegna"),
                         array(
                             $id_ordine,
-                            $_POST['indirizzo'],
-                            $_POST['citta'],
-                            $_POST['comune'],
+                            $value['indirizzo'],
+                            $value['citta'],
+                            $value['comune'],
                             $giorno_consegna));
             }
             $result_ordine_tipo = mysqli_query($connection, $sql_ordine_tipo );
@@ -117,15 +123,25 @@ if( isset( $_SESSION['user_login'] )
             }
             break;
         case "get_dates_orders":
-            $query_date = quick_select(
-                    array("data"),
-                    array("ordini"),
-                    null,
-                    null);
+            $query_date_locale = quick_select2(
+                    array("o.data"),
+                    array("ordini o", "ordini_locale ol"),
+                    array("o.id"),
+                    array("ol.id") );
+            $query_date_domicilio = quick_select2(
+                    array("od.giorno_consegna as data"),
+                    array("ordini o", "ordini_domicilio od"),
+                    array("o.id"),
+                    array("od.id") );
+            $query_date = "SELECT DISTINCT CAST( data as date ) as data
+                        FROM (
+                        ( $query_date_locale ) UNION ( $query_date_domicilio )
+                        ) as d ORDER BY d.data;";
             $result_date = mysqli_query($connection, $query_date);
             $date = array();
             while( $row = mysqli_fetch_assoc( $result_date ) ){
-                $date[] = explode(" ", $row['data'] )[0];
+                // $date[] = explode(" ", $row['data'] )[0];
+                $date[] = $row['data'];
             }
             echo json_encode( $date );
             break;

@@ -251,26 +251,6 @@ function order(){
                 $( "#cart_form" ).find(".container").css( "display", "block" );
                 // fine loader
                 $( "#cart_form" ).find(".container").html( response_a );
-                $( "#setTavolo").find("button").click( function( event ){
-                    if( $( "#setTavolo").find("[name='tavolo']").val() > 0 ){
-                        $.ajax(
-                            {
-                                type: 'post',
-                                url: 'scripts/ordine.php',
-                                data:
-                                {
-                                    action: "register",
-                                    value: JSON.stringify( { tavolo: $( "#setTavolo").find("[name='tavolo']").val() } )
-                                },
-                                success: function (response_b) 
-                                {
-                                    refreshCart( true );
-                                    alert( response_b );
-                                }
-                            }
-                        );
-                    }
-                });
             }   
         });
     }

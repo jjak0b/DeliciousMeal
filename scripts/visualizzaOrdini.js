@@ -38,6 +38,7 @@ function checkDateOrders(date) {
         return [true, "","Disponibile"];
     }
     else {
+        // alert( mydate +" non in "+ $( dateOrders).serialize() );
         return [false,"","Non disponibile"];
     }
 }

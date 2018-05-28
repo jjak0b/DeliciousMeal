@@ -33,18 +33,22 @@ function checkDateOrders(date) {
 }
 $("#form_domicilio").submit(function( event ) {
     var value = {};
-    var myvalues = JSON.parse( $( this ).serializeArray() );
+    var myvalues = $( this ).serializeArray();
     for( var i = 0; i < myvalues.length; i++ ){
         value[ myvalues[i]["name"] ] = myvalues[i]["value"];
         console.log( myvalues[i]["name"] + " = " + myvalues[i]["value"] );
     }
-    alert( JSON.stringify( value ) );
     $.ajax({
         type: $(this).attr("method"),
         url: $(this).attr("action"),
         data: {
             action: "register", 
             value: JSON.stringify( value )
+        },
+        success: function (response) 
+        {
+            alert( response );
+            refreshCart( true );
         }
     });
     
