@@ -141,7 +141,8 @@ function setup_menu( menudiv ){
     navbar.addMenu( menu3 );
     
     
-    menudiv.appendChild( navbar.getNode() );
+    // $( menudiv ).appendChild( navbar.getNode() );
+    
     return navbar;
 }
 
@@ -153,76 +154,62 @@ function getAppPath() {
     }
     return appPath;
 }
-    
-window.onload = function () {
-    var menudiv = document.getElementById("menu");
-    var navbar = setup_menu( menudiv );
-    
-    
-    
+$("#menu").ready( function () {
+    var navbar = setup_menu();
+    $( navbar.getNode() ).appendTo( $("#menu") );
     // login 
-    
-    var menu_login = new Menu("Login"); 
+    var menu_login = new Menu("Login");
+    navbar.addMenu( menu_login );
     var login = menu_login.getNode();
-    
     var login_session = sessionStorage.getItem("user_login");
-    var div = document.createElement("div");
-    div.classList.add("modal");
-    div.setAttribute("id", "login_form");// solo il div nella navbar avrà questo id
-    div.classList.add( "login_form" );
-    menu_login.button.addEventListener( "click", function(event) {
-            div.style.display= "block";
+    
+    var div = createModalForm();
+    $( div ).attr( "id", "login_form");// solo il div nella navbar avrà questo id
+    $( div ).addClass( "login_form" );
+    $( div ).appendTo( login );
+    $( menu_login.button ).click( function(event) {
+            $( div ).css( "display", "block");
         }
     );
-    // When the user clicks anywhere outside of the modal, close it
-    div.addEventListener("click", function(event) {
-            if (event.target == div) {
-                div.style.display = "none";
+    
+    $.ajax( {
+        type: 'post',
+        url: 'create_form_login.php',
+        data: 
+        {
+            action: "login"
+        },
+        success: function (response) 
+        {
+            // la risposta è un oggetto JSON, --> oggetto sessione
+            if( response.charAt(0) == '{')
+            {
+                // menu_login.button = document.createElement("a");
+                childNodes = menu_login.button.childNodes;
+                childNodes[0].nodeValue = "Logout";
+                menu_login.button.href = "scripts/logout.php";
+                sessionStorage.setItem("user_login", JSON.parse( response ) );
+                menu_login.button.addEventListener("click", function(event) {
+                        if (event.target == div) {
+                            sessionStorage.removeItem( "user_login" );
+                        }
+                    }
+                );
             }
+            else{ // la risposta è un contenuto html
+                $( div ).find( ".container" ).html( response ); 
+            }
+        }
         }
     );
 
-    $.ajax( {
-                type: 'post',
-                url: 'create_form_login.php',
-                data: 
-                {
-                    action: "login"
-                },
-                success: function (response) 
-                {
-                    // la risposta è un oggetto JSON, --> oggetto sessione
-                    if( response.charAt(0) == '{')
-                    {
-                        // menu_login.button = document.createElement("a");
-                        childNodes = menu_login.button.childNodes;
-                        childNodes[0].nodeValue = "Logout";
-                        menu_login.button.href = "scripts/logout.php";
-                        sessionStorage.setItem("user_login", JSON.parse( response ) );
-                        menu_login.button.addEventListener("click", function(event) {
-                                if (event.target == div) {
-                                    sessionStorage.removeItem( "user_login" );
-                                }
-                            }
-                        );
-                    }
-                    else{ // la risposta è un contenuto html
-                        div.innerHTML = response; 
-                        login.appendChild( div );
-                    }
-                    
-                }
-        }
-    );
-    
-    navbar.addMenu( menu_login );
-};
+} );
 
 function registerSection( ele ){
     
     // var div = document.getElementById('login_form');
-    var divs = document.getElementsByClassName("login_form");
-    
+    var divs = $(".login_form")
+    if( ele != null )
     $.ajax( {
             type: 'post',
             url: 'create_form_login.php',
@@ -233,8 +220,8 @@ function registerSection( ele ){
             success: function (response) 
             {
                 var i = 0
-                for( i = 0; i < divs.length; i++ ){
-                    divs[i].innerHTML = response; 
+                for( i = 0; i < $(".login_form").length; i++ ){
+                    $( $(divs).get( i ) ).find(".container").html( response );
                 }
             }
         }
@@ -243,7 +230,7 @@ function registerSection( ele ){
 
 function loginSection( ele ){
     // var div = document.getElementById('login_form');
-    var divs = document.getElementsByClassName("login_form");
+    var divs = $(".login_form")
     
     $.ajax( {
             type: 'post',
@@ -256,7 +243,7 @@ function loginSection( ele ){
             {
                 var i = 0
                 for( i = 0; i < divs.length; i++ ){
-                    divs[i].innerHTML = response; 
+                    $( $(divs).get( i ) ).find(".container").html( response );
                 }
             }
         }

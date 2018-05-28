@@ -1,9 +1,5 @@
-<form class="modal-content animate" action="scripts/register.php" method="post">
-    <div class="header_container">
-      <span onclick="document.getElementById('login_form').style.display='none'" class="close" title="Chiudi">&times;</span>
-    </div>
-
-    <div class="container">
+<form action="scripts/register.php" method="post">
+    <div class="center" >
         <div class="form-section">
             <label class="form-field"><b>Nome</b></label>
             <input class="form-field"type="text" placeholder="Il tuo Nome" name="name" required>
@@ -23,8 +19,7 @@
 
         <button type="submit">Registrati</button>
     </div>
-
-    <div class="container center" >
+    <div class="center" >
         <label>Hai già un account?</label>
         <button type="button" onclick="loginSection(this)" style="width:50%;"<b>Accedi</b></button>
     </div>

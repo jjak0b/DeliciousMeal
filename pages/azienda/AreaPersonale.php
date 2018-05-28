@@ -60,7 +60,9 @@
                         {
                             echo "<p>Se sei un dipendente della nostra azienda, accedi con le credenziali fornite</p>";
                             echo "<div class=\"login_form\" style=\"display: block;\">";
-                            include_once( "../../forms/loginForm.php" );
+                                echo "<div class=\"container\"";
+                                    include_once( "../../forms/loginForm.php" );
+                                echo "</div>";
                             echo "</div>";
                         }else{
                             echo "<section>";
@@ -70,8 +72,6 @@
                             echo "<div id=\"workArea\">";
                             // include_once( "../../forms/assignUsersForm.php" );
                             echo "<div>";
-                            
-                            
                         }
                     ?>
                 </div>
