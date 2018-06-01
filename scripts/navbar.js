@@ -164,59 +164,37 @@ $("#menu").ready( function () {
     var login_session = sessionStorage.getItem("user_login");
     
     var div = createModalForm();
-    $( div ).attr( "id", "login_form");// solo il div nella navbar avrà questo id
+    // solo il div nella navbar avrà questo id
+    $( div ).attr( "id", "login_form");
     $( div ).addClass( "login_form" );
     $( div ).appendTo( login );
     $( menu_login.button ).click( function(event) {
+            if( loggedIn == true ) return;
             $( div ).css( "display", "block");
         }
     );
-    
+    if( loggedIn ){
+        var childNodes = menu_login.button.childNodes;
+        childNodes[0].nodeValue = "Logout";
+        menu_login.button.href = "scripts/logout.php";
+    }
     $.ajax( {
-        type: 'post',
-        url: 'create_form_login.php',
-        data: 
-        {
-            action: "login"
-        },
-        success: function (response) 
-        {
-            // la risposta è un oggetto JSON, --> oggetto sessione
-            if( response.charAt(0) == '{')
+            type: 'get',
+            url: 'forms/loginForm.php',
+            success: function (response) 
             {
-                // menu_login.button = document.createElement("a");
-                childNodes = menu_login.button.childNodes;
-                childNodes[0].nodeValue = "Logout";
-                menu_login.button.href = "scripts/logout.php";
-                sessionStorage.setItem("user_login", JSON.parse( response ) );
-                menu_login.button.addEventListener("click", function(event) {
-                        if (event.target == div) {
-                            sessionStorage.removeItem( "user_login" );
-                        }
-                    }
-                );
+                $( div ).find( ".container" ).html( response );
             }
-            else{ // la risposta è un contenuto html
-                $( div ).find( ".container" ).html( response ); 
-            }
-        }
         }
     );
-
 } );
 
 function registerSection( ele ){
-    
-    // var div = document.getElementById('login_form');
     var divs = $(".login_form")
     if( ele != null )
     $.ajax( {
-            type: 'post',
-            url: 'create_form_login.php',
-            data: 
-            {
-                action: "register"
-            },
+            type: 'get',
+            url: 'forms/registerForm.php',
             success: function (response) 
             {
                 var i = 0
@@ -229,16 +207,10 @@ function registerSection( ele ){
 }
 
 function loginSection( ele ){
-    // var div = document.getElementById('login_form');
     var divs = $(".login_form")
-    
     $.ajax( {
-            type: 'post',
-            url: 'create_form_login.php',
-            data: 
-            {
-                action: "login"
-            },
+            type: 'get',
+            url: 'forms/loginForm.php',
             success: function (response) 
             {
                 var i = 0

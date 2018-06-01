@@ -123,6 +123,8 @@ if( isset( $_SESSION['user_login'] )
             }
             break;
         case "get_dates_orders":
+            $unita = get_unita( $connection,
+                                $_SESSION['user_login']['id'] );
             $query_date_locale = quick_select2(
                     array("o.data"),
                     array("ordini o", "ordini_locale ol"),
@@ -133,14 +135,26 @@ if( isset( $_SESSION['user_login'] )
                     array("ordini o", "ordini_domicilio od"),
                     array("o.id"),
                     array("od.id") );
-            $query_date = "SELECT DISTINCT CAST( data as date ) as data
+            if( !$unita ){
+                $query_date_domicilio .= " AND o.id_utente = \"".
+                        $_SESSION['user_login']['id']."\"";
+            }
+            $query_date;
+            if( $unita ){
+                $query_date = "SELECT DISTINCT CAST( data as date ) as data
                         FROM (
                         ( $query_date_locale ) UNION ( $query_date_domicilio )
                         ) as d ORDER BY d.data;";
+            }
+            else{
+                $query_date = "SELECT DISTINCT CAST( data as date ) as data"
+                        . " FROM ( $query_date_domicilio ) as d"
+                        . " ORDER BY d.data;";
+            }
+
             $result_date = mysqli_query($connection, $query_date);
             $date = array();
             while( $row = mysqli_fetch_assoc( $result_date ) ){
-                // $date[] = explode(" ", $row['data'] )[0];
                 $date[] = $row['data'];
             }
             echo json_encode( $date );

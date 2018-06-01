@@ -21,8 +21,13 @@
 <details style="text-align: left; display: block; width: 100%;">
     <summary>Ordini domicilio</summary>
     <?php
+        $unita = get_unita( $connection,
+                    $_SESSION['user_login']['id'] );
         $tavolo;
         $id_utente;
+        if( !$unita ){ // filtra la query in base all'utente non dipendente
+            $id_utente = $_SESSION['user_login']['id'];
+        }
         $query_ordini_domicilio = "SELECT od.id as id_ordine,
                                     o.id_utente,
                                     od.giorno_consegna,
@@ -32,7 +37,7 @@
                                 FROM ordini_domicilio od, ordini o
                                 WHERE od.id = o.id";
         if( isset( $id_utente ) ){
-            $query_ordini_domiciclio .= " AND o.id_utente = '$id_utente'";
+            $query_ordini_domicilio .= " AND o.id_utente = \"$id_utente\"";
         }
         if( isset( $value ) && isset( $value['date'] ) ){
             $query_ordini_domicilio .= " AND cast(od.giorno_consegna as date) = \"".$value['date']."\"";

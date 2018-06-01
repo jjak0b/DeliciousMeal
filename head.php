@@ -16,4 +16,10 @@
 <script src="ajax/libs/jquery/3.3.1/jquery-3.3.1.js" ></script>
 <script src="ajax/libs/jquery-ui/1.12.1/jquery-ui.js"></script>
 <script src="scripts/js/shared_site.js"></script>
+<script type='text/javascript'>
+    var loggedIn = <?php
+                if( isset( $_SESSION['user_login'] ) ) echo "true";
+                else echo "false";
+    ?>;
+</script>
 <script src="scripts/navbar.js"></script>

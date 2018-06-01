@@ -19,51 +19,32 @@
         }
         switch ( $action ){
             case "get":
-                
                 if( isset( $user )){
-                    if( isset( $unita )){
-                        $sql_query = quick_select2(
-                            array("r.id", "r.ruolo" ),
-                            array("unita un", "ruoli r", "utenti usr"),
-                            array("r.id_utente", "r.id_unita", "usr.id" , "un.id" ),
-                            array("usr.id", "un.id", "'$user'", "'$unita'")
-                            );
+                    $sql_query = quick_select2(
+                        array("d.id", "d.ruolo" ),
+                        array( "dipendenti d", "utenti usr"),
+                        array("d.id", "d.id" ),
+                        array("usr.id", "\"$user\"" )
+                        );
+                    $sql_query.= " ORDER BY d.ruolo;";
+                    $result = mysqli_query( $connection, $sql_query);
+                    $row = mysqli_fetch_assoc($result);
+                    if( $row && !is_null( $row['ruolo'] ) ){
+                        echo $row['ruolo'];
                     }
-                    else{
-                        $sql_query = quick_select2(
-                            array("r.id", "r.ruolo" ),
-                            array( "ruoli r", "utenti usr"),
-                            array("r.id_utente", "usr.id" ),
-                            array("usr.id", "'$user'" )
-                            );
-                        $sql_query.= " AND r.id_unita IS NULL";
-                    }
+                    else echo "";
                 }
-                
-
-                $sql_query.= " ORDER BY r.ruolo;";
-                echo $sql_query;
-                $result = mysqli_query( $connection, $sql_query);
-
-                while( $row = mysqli_fetch_assoc($result) ){
-                    echo "<option value=\"".$row['id']."\">".$row['ruolo']."</option>";
-                }
-
-
                 break;
             case "add":
                 $ruolo = $value['ruolo'];
-                $sql_query = insert(   "ruoli",
-                                        array("id_utente", "id_unita", "ruolo" ),
-                                        array( $user, $unita, $ruolo )
-                                    );
+                $sql_query = insert(   "dipendenti",
+                                        array("id", "id_unita", "ruolo" ),
+                                        array( $user, $unita, $ruolo ) );
                 echo $sql_query;
                 $result = mysqli_query( $connection, $sql_query);
                 break;
             case "delete":
-                $ruolo = $value['ruolo'];
-                $sql_query = "DELETE FROM ruoli WHERE id = '$ruolo'";
-                echo $sql_query;
+                $sql_query = "DELETE FROM dipendenti WHERE id=\"$user\"";
                 $result = mysqli_query( $connection, $sql_query);
                 break;
         }

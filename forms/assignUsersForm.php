@@ -2,7 +2,7 @@
     <section>
         <select id="users" name="users" style="min-width: 40%">
         </select>
-        <input id="search_user" type="search" name="search_user" placeholder="ricerca utente" style="width: 40%">
+        <input id="search_user" type="search" name="search_user" placeholder="Cerca un utente" style="width: 40%">
         
     </section>
     
@@ -27,26 +27,25 @@
                 </tr>
                 <tr>
                     <td style="width: 40%">
-                        <label style="width: 100%">Ruoli assegnati</label>
+                        <label style="width: 100%">Ruolo assegnato</label>
                     </td>
                 </tr>
                 <tr>
                     <td style="width: 40%">
-                        <select id="ruolo_assigned" placeholder="Ruolo assegnato" style="width: 100%;" >
-                        </select>
+                        <input id="ruolo_assigned" type="text" name="ruolo_assigned" placeholder="Nessun ruolo assegnato" disabled style="width: 60%;">
                     </td>
                     <td style="width: 40%">
-                        <button id="delete_ruolo" style="width: 100%">Rimuovi ruolo</button>
+                        <button id="delete_ruolo" style="width: 60%">Rimuovi ruolo</button>
                     </td>
                 </tr>
                 
                 
                 <tr>
                     <td style="width: 40%">
-                        <input id="ruolo_toadd" type="text" name="ruolo_toadd" placeholder="nome ruolo" style="width: 100%">
+                        <input id="ruolo_toadd" type="text" name="ruolo_toadd" placeholder="Scrivi il nome del ruolo da assegnare" style="width: 60%;">
                     </td>
                     <td style="width: 40%">
-                        <button id="add_ruolo" style="width: 100%">Aggiugi ruolo</button>
+                        <button id="add_ruolo" style="width: 60%">Imposta ruolo</button>
                     </td>
                 </tr>
         </table>

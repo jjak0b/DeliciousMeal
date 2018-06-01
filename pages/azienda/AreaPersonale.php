@@ -2,6 +2,7 @@
 <?php
     include_once('../../config.php' );
     include_once('../../scripts/utility.php' );
+    include_once('../../scripts/shared_site.php' );
 ?>
 <html>
     <head>
@@ -19,6 +20,16 @@
             <div class="container">
                 <div class="connection-info">
                     <?php
+                    if( !isset( $connection ) ){
+                        $connection = mysqli_connect(HOST, USER, PASSWORD, DB_NAME );
+                    }
+
+                    // Check connection
+                    if ( mysqli_connect_errno() )
+                    {
+                        echo "<p>Failed to connect to MySQL: " . mysqli_connect_error()."</p>";
+                    }
+                    
                     if( isset( $_GET['login'] ) ){
                         $result_login = $_GET['login'];
                     }
@@ -54,28 +65,64 @@
                 ?>
                 </div>
                 <div id="area_personale">
-                    
-                    <?php
-                        if( !isset( $_SESSION['user_login'] ) )
-                        {
-                            echo "<p>Se sei un dipendente della nostra azienda, accedi con le credenziali fornite</p>";
-                            echo "<div class=\"login_form\" style=\"display: block;\">";
-                                echo "<div class=\"container\"";
-                                    include_once( "../../forms/loginForm.php" );
-                                echo "</div>";
+                <?php
+                    if( !isset( $_SESSION['user_login'] ) )
+                    {
+                        echo "<p class=\"center\">Accedi con le tue credenziali"
+                        . " private, oppure registrati sul nostro sito</p>";
+                        echo "<div class=\"login_form center\" style=\"display: block; width: 60%\">";
+                            echo "<div class=\"container\">";
+                                include_once( "../../forms/loginForm.php" );
                             echo "</div>";
-                        }else{
-                            echo "<section>";
-                                echo "sezione sempre presente dopo login per scopo didattico, altrimenti dovrebbe apparire solo se l'utente loggato è stato assegnato alla direzione o risorse umane";
-                            echo "</section>";
-                            echo "<script src=\"scripts/area_personale.js\"></script>";
-                            echo "<div id=\"workArea\">";
-                            // include_once( "../../forms/assignUsersForm.php" );
-                            echo "<div>";
+                        echo "</div>";
+                    }
+                    else{
+                        $unita = get_unita( $connection,
+                                    $_SESSION['user_login']['id'] );
+                        if( $unita ){ // carico script per i dipendenti
+                            echo "<script src=\"scripts/area_dipendenti.js\">"
+                                . "</script>";
                         }
-                    ?>
+                        else{ // carico script per utenti
+                            echo "<script src=\"scripts/area_clienti.js\">"
+                                . "</script>";
+                        }
+                        echo "<div id=\"workArea\">";
+                        echo "</div>";
+                    }
+                ?>
                 </div>
             </div>
+            <script>
+                function createSection( title, url )
+                {
+                    var section = $("<section>");
+                    var btn = $("<button>");
+                    btn.text(  title );
+                    btn.attr( "title",  title );
+                    btn.click( {url: url }, load_section );
+
+                    section.append( btn );
+                    return section;
+                }
+                function load_section( event )
+                {
+                    var url = event.data.url;
+                    $.ajax(
+                    {
+                            type: 'post',
+                            url: url,
+                            data:
+                            {
+                                action: "post"
+                            },
+                            success: function (response) 
+                            {
+                                $("#workArea").html( response );
+                            }
+                    } );
+                }
+            </script>
         </div>
     </body>
 </html>

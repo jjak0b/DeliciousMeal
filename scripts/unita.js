@@ -22,10 +22,9 @@ function assign_unita( event ){
         },
         success: function (response)
         {
+            get_unita();
         }
     } );
-    
-    get_unita();
 }
 
 // non usata
@@ -59,7 +58,6 @@ function get_unita(){
         },
         success: function (response) 
         {
-            // alert( "get_unita: " + response );
             $('#unita').html( response );
         }
     } );
@@ -76,9 +74,7 @@ function get_unita(){
         },
         success: function (response) 
         {
-            // alert( "get_user_unita with id " + value + " : " + response );
             $('#unita_assigned').html( response );
-            $("#assign_unita").prop("disabled", $('#unita_assigned').find('option:selected').val() == undefined);
             $("#assign_unita").prop("disabled", $('#unita_assigned').find('option:selected').val() == undefined);
             $('#unita_assigned').trigger("updatedlist");
         }

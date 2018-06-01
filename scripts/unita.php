@@ -1,5 +1,6 @@
 <?php
     include_once('utility.php' );
+    include_once('shared_site.php' );
     include_once('../config.php' );
 
     $connection = mysqli_connect(HOST, USER, PASSWORD, DB_NAME );
@@ -41,19 +42,8 @@
                 exit( 0 );
                 break;
             case "get_user_unita":
-                $sql_query = quick_select2(
-                                        array("un.id", "un.nome" ),
-                                        array("unita un", "ruoli r", "utenti usr"),
-                                        array("r.id_utente", "r.id_unita", "usr.id"),
-                                        array("usr.id", "un.id", "'$value'", )
-                                        );
-                $sql_query.= " ORDER BY un.nome;";
-                $result = mysqli_query( $connection, $sql_query);
-                
-                if( $row = mysqli_fetch_assoc($result) ){
-                    echo "<option value=\"".$row['id']."\">".$row['nome']."</option>";
-                }
-                
+                $row = get_unita( $connection, $value );
+                echo "<option value=\"".$row['id']."\">".$row['nome']."</option>";
                 mysqli_close($connection);
                 return;
                 break;

@@ -22,9 +22,13 @@
     <div id="filter_order">
         <input type="text" id="datepicker">
     </div>
-    <div id="ordini_locale">
-    </div>
-    <div id="ordini_domicilio">
-    </div>
+    <?php
+        $unita = get_unita( $connection,
+                    $_SESSION['user_login']['id'] );
+        if( $unita ){
+            echo "<div id=\"ordini_locale\"></div>";
+        }
+        echo "<div id=\"ordini_domicilio\"></div>";
+    ?>
     <script src="scripts/visualizzaOrdini.js"></script>
 </div>

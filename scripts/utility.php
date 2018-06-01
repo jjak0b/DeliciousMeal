@@ -206,10 +206,15 @@
                 return $query;
             }
             
-            function insert($str_table, $attributes, $values)
+            function insert($str_table, $attributes, $values, $b_update = TRUE )
             {
                 foreach ($values as $key => $value) {
-                    $values[ $key ] = "'$value'";
+                    if( empty( $value ) ){
+                        $values[$key] = "NULL";
+                    }
+                    else{
+                        $values[ $key ] = "\"$value\"";
+                    }
                 }
                 $query = "INSERT INTO $str_table(";
                 
@@ -224,7 +229,19 @@
                 {
                     $query .= implode(', ', $values );
                 }
-                $query .=");";
+                $query .=")";
+                
+                if( $b_update ){
+                    $a_keys = array_keys( $attributes );
+                    $v_keys = array_keys( $values );
+                    $sql = array();
+                    $query .=" ON DUPLICATE KEY UPDATE ";
+                    for ($i = 0; $i < count($a_keys); $i++) {
+                        $sql[] = " ".$attributes[$a_keys[$i]]."=".$values[$v_keys[$i]]." ";
+                    }
+                    $query .= implode(', ', $sql );
+                }
+                
                 return $query;
             }
             

@@ -110,8 +110,8 @@ function get_product_info( $connection, $id_value )
 function get_unita( $connection, $id_utente ){
     $sql_query = quick_select2(
         array("un.id", "un.nome" ),
-        array("unita un", "ruoli r", "utenti usr"),
-        array("r.id_utente", "r.id_unita", "usr.id"),
+        array("unita un", "dipendenti d", "utenti usr"),
+        array("d.id", "d.id_unita", "d.id"),
         array("usr.id", "un.id", "\"$id_utente\"")
         );
     $result = mysqli_query($connection, $sql_query);
