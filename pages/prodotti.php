@@ -24,31 +24,31 @@
         <div class="main">
             <div class="container">
                 <div class="center">
-                    <form id=menu_filter >
+                    <div id="menu_filter">
                         <select id="categoria">
-                            <?php
-                                $query_categorie = quick_select(
-                                        array("c.id", "c.nome", "c.descrizione"),
-                                        array("categorie c"),
-                                        null,
-                                        null
-                                    );
-                                
-                                echo "<option value=\"0\">tutti</option>";
-                                $result_c = mysqli_query($connection, $query_categorie);
-                                while( $row = mysqli_fetch_assoc( $result_c ) ){
-                                    echo "<option ";
-                                    if( isset( $_GET['c'] ) && $_GET['c'] == $row['id'] ){
-                                        echo " selected ";
-                                    }
-                                    echo " value=\"".$row['id']."\" title=\"".$row['descrizione']."\"";
-                                    echo ">".$row['nome']."</option>";
+                        <?php
+                            $query_categorie = quick_select(
+                                    array("c.id", "c.nome", "c.descrizione"),
+                                    array("categorie c"),
+                                    null,
+                                    null
+                                );
+
+                            echo "<option value=\"0\">tutti</option>";
+                            $result_c = mysqli_query($connection, $query_categorie);
+                            while( $row = mysqli_fetch_assoc( $result_c ) ){
+                                echo "<option ";
+                                if( isset( $_GET['c'] ) && $_GET['c'] == $row['id'] ){
+                                    echo " selected ";
                                 }
-                            ?>
+                                echo " value=\"".$row['id']."\" title=\"".$row['descrizione']."\"";
+                                echo ">".$row['nome']."</option>";
+                            }
+                        ?>
                         </select>
-                        <input id="filter" type="search" placeholder="Cerca un piatto nella categoria selezionata">
-                        
-                    </form>
+                        <input id="filter" type="search" placeholder="Cerca un piatto nella categoria">
+                        <button onclick="addToCart( this, undefined )" style="width: max-content">Il mio carrello</button>
+                    </div>
                 </div>
                 <ul class="menu-list">
                 </ul>

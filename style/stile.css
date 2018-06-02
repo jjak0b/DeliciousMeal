@@ -524,12 +524,13 @@ button:hover {
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-    padding-top: 60px;
+    padding-top: 2em;
+    padding-bottom: 2em;
 }
 
 /* Modal Content/Box */
 .modal-content {
-    margin: 1% auto;
+    margin: 5% auto;
     border: 1px solid transparent;
     /*width: 75%; /* Could be more or less, depending on screen size */
     max-width: max-content;

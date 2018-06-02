@@ -3,16 +3,17 @@
  * Funzioni condivise e utilizzate da altri script del sito
  */
 function get_ingredienti_disponibili( $connection, $index, $id_pietanza ){
-    $query_ing_default = quick_select2( array("i.id"),
-                                            array("ingredienti i", "ingredienti_pietanze ip", "pietanze p"),
-                                            array("i.id", "p.id", "p.id"),
-                                            array( "ip.id_ingrediente", "ip.id_pietanza", $id_pietanza) );
-    $query_ing_all = quick_select2( array("i.id", "i.nome", "i.prezzo"),
-                                        array("ingredienti i"),
-                                        null,
-                                        null);
-    $query_ing_available = $query_ing_all." WHERE i.id NOT IN ( $query_ing_default ) ORDER BY i.nome";
-    
+    /*  $query_ing_default = quick_select2(
+                array("i.id"),
+                array("ingredienti i", "ingredienti_pietanze ip", "pietanze p"),
+                array("i.id", "p.id", "p.id"),
+                array( "ip.id_ingrediente", "ip.id_pietanza", $id_pietanza) );*/
+    $query_ing_sup = quick_select2(
+            array("i.id", "i.nome", "i.prezzo"),
+            array("ingredienti i", "pietanze p", "ingredienti_supplementari sup"),
+            array("i.id", "p.id", "sup.id_pietanza"),
+            array("sup.id_ingrediente", "sup.id_pietanza", $id_pietanza) );
+    $query_ing_available = $query_ing_sup." ORDER BY i.nome";
     $result_available = mysqli_query($connection, $query_ing_available );
     $rows = [];
     while( $row = mysqli_fetch_assoc($result_available) ){
@@ -71,10 +72,11 @@ function get_ingredienti_correnti( $connection, $index, $id_pietanza ){
 }
 
 function get_default_ingredienti( $connection, $id_pietanza ){
-    $query_ing_default = quick_select2( array("i.id", "i.nome", "i.prezzo"),
-                                        array("ingredienti i", "ingredienti_pietanze ip", "pietanze p"),
-                                        array("i.id", "p.id", "p.id"),
-                                        array( "ip.id_ingrediente", "ip.id_pietanza", $id_pietanza) );
+    $query_ing_default = quick_select2(
+            array("i.id", "i.nome", "i.prezzo"),
+            array("ingredienti i", "ingredienti_pietanze ip", "pietanze p"),
+            array("i.id", "p.id", "p.id"),
+            array( "ip.id_ingrediente", "ip.id_pietanza", $id_pietanza) );
     $result_default = mysqli_query($connection, $query_ing_default );
     $rows = [];
     while( $row = mysqli_fetch_assoc($result_default) ){
@@ -85,9 +87,9 @@ function get_default_ingredienti( $connection, $id_pietanza ){
 
 function get_ingrediente( $connection, $id_ingrediente ){
     $query_ing = quick_select2( array("*"),
-                                        array("ingredienti"),
-                                        array("id" ),
-                                        array( $id_ingrediente) );
+                                array("ingredienti"),
+                                array("id" ),
+                                array( $id_ingrediente) );
     $result_default = mysqli_query($connection, $query_ing );
     $row = mysqli_fetch_assoc($result_default);
     return $row;

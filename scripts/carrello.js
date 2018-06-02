@@ -97,6 +97,10 @@ function removeIngrediente( event ){
 }
 
 function addToCart( element, id ){
+    if( id == undefined || id < 0 ){
+        refreshCart( false );
+        return;
+    }
     var value = { id:id };
     $.ajax(
     {

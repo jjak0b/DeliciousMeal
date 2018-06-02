@@ -20,19 +20,19 @@
                 <div class="left" style="width-min: min-content;">
                     <h2>Servizio Clienti</h2> 
                     <p>Uno dei nostri principali valori è da sempre l'attenzione verso i nostri clienti: anche Delicious Meal mette a disposizione un servizio di Assistenza Clienti efficace, veloce e preciso!</p>
-                    <p>Puoi chiamarci nella fascia oraria di apertura effettuare prenotazioni al nostro ristorante</p>
+                    <p>Puoi chiamarci nella fascia oraria di apertura per effettuare prenotazioni al nostro ristorante</p>
                     <p>
-                        <b>Attenzione: gli ordini con consegna a domicilio possono essere effettuati solo Online nell' apposita <a href="pages/ordina.php">sezione</a></b><br>
+                        <b>Attenzione: gli ordini con consegna a domicilio possono essere effettuati solo Online nell'apposita <a href="pages/prodotti.php">sezione</a></b><br>
                         Puoi eventualmente contattarci dopo aver effettuato un ordine con successo per avvisare eventuali allergie o intolleranze alimentari specificando l'ordine effettuato con il relativo nominativo.
                     </p>
                     
                     <p>
-                        I nostri Orari d'apertura sono dal Lunedì al Sabato dalle 8:00 alle 24:00 se vuoi pranzare o cenare nella nostra sede.<br>
-                        Il servizio di consegna a domicio è invece disponibile dalle 10:30 alle 21:30 di tutti i giorni.<br>
+                        Siamo aperti tutti i giorni eccetto il Giovedì dalle 10:00 alle 15:00 e dalle 18:00 alle 23:00 se vuoi pranzare o cenare nella nostra sede.<br>
+                        Il servizio di consegna a domicio è invece disponibile dalle 10:00 alle 15:00 e dalle 19:00 alle 22:30 nei giorni in cui siamo aperti.<br>
                     </p>
-                    <p> Contattaci via telefono dal Lunedi al Sabato dalle ore 8 alle 24 in uno dei seguenti modi:</p>
+                    <p> Contattaci via telefono dal Lunedi al Sabato dalle ore 10:00 alle 23:00 in uno dei seguenti modi:</p>
                     <ul>
-                        <li>Al Numero <b>0534 12345</b> (gratuito da rete fissa)</li>
+                        <li>Al Numero <b>0123 45678</b> (gratuito da rete fissa)</li>
                         <li>da cellulari al numero <b>39 9999999999</b> (al costo del tuo piano tariffario)</li>
                         <li>Contattaci via Fax al seguente numero: <b>02 99999990</b></li>
                         <li>via email all'indirizzo:  <b>delicious.meal@gmail.com</b></li>

@@ -74,7 +74,7 @@ $("#form_domicilio").submit(function( event ) {
         <div class="form-section">
             <label class="form-field">Giorno di Consegna</label>
             <div id="datepicker" class="form-field">
-                <input name="giorno" type="text" required placeholder="Seleziona Il giorno">
+                <input name="giorno" type="text" required placeholder="Seleziona Il giorno" autocomplete=off >
                 <script>
                     $( document.forms["form_domicilio"]["giorno"]).on("keydown paste", function( e ){
                         e.preventDefault();

@@ -28,7 +28,7 @@ if( !isset( $_SESSION['carrello'] ) ){
 ?>
 <section>
     <?php
-    echo "numero prodotti:".count( $_SESSION['carrello'] );
+    echo "Numero prodotti:".count( $_SESSION['carrello'] );
     echo "<table align=center>";
     foreach ($_SESSION['carrello'] as $key => $prodotto) {
         $id_li = "c_".$key;
