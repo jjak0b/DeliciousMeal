@@ -154,29 +154,29 @@ function getAppPath() {
     }
     return appPath;
 }
-$("#menu").ready( function () {
-    var navbar = setup_menu();
+$("#nav").ready( function () {
+    /*var navbar = setup_menu();
     $( navbar.getNode() ).appendTo( $("#menu") );
     // login 
     var menu_login = new Menu("Login");
     navbar.addMenu( menu_login );
     var login = menu_login.getNode();
-    var login_session = sessionStorage.getItem("user_login");
+    var login_session = sessionStorage.getItem("user_login");*/
     
     var div = createModalForm();
     // solo il div nella navbar avrà questo id
     $( div ).attr( "id", "login_form");
     $( div ).addClass( "login_form" );
-    $( div ).appendTo( login );
-    $( menu_login.button ).click( function(event) {
+    $( ".main").append( $( div ) );
+    
+    $( "#login_button" ).click( function(event) {
             if( loggedIn == true ) return;
             $( div ).css( "display", "block");
         }
     );
     if( loggedIn ){
-        var childNodes = menu_login.button.childNodes;
-        childNodes[0].nodeValue = "Logout";
-        menu_login.button.href = "scripts/logout.php";
+        $( "#login_button" ).text("Logout");
+        $( "#login_button" ).attr( "href", "scripts/logout.php" );
     }
     $.ajax( {
             type: 'get',
@@ -188,6 +188,7 @@ $("#menu").ready( function () {
         }
     );
 } );
+
 
 function registerSection( ele ){
     var divs = $(".login_form")

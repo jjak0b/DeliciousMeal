@@ -18,10 +18,9 @@ echo "<header>
         <div class=\"logo-motto\">
             <h1 class=\"logo-text\">Ordina, paga, mangia: tutto questo da casa tua</h1>
         </div>
-        <script src=\"scripts/menu.js\" charset=\"UTF-8\"></script>
-        <div id=\"menu\">
-        </div>
-    </header>";
+        <script src=\"scripts/menu.js\" charset=\"UTF-8\"></script>";
+include_once( "scripts/navbar.php");
+echo "</header>";
 
  if( isset( $_SESSION['user_login'] ) )
  {
