@@ -14,21 +14,23 @@ $connection = mysqli_connect(HOST, USER, PASSWORD, DB_NAME ) or die();
 
 switch( $action ){
     case "update":
-        $index = $value['index'];
-        $info = $value['data'];
-        if( isset( $_SESSION['carrello'][$index] ) ){
-            if(!isset( $_SESSION['carrello'][$index]['aggiunti'] ) ){
-                $_SESSION['carrello'][$index]['aggiunti'] = [];
-            }
-            if(!isset( $_SESSION['carrello'][$index]['rimossi'] ) ){
-                $_SESSION['carrello'][$index]['rimossi'] = [];
-            }
+        foreach ($value as $key => $data) {
+            $index = $data['index'];
+            $info = $data['data'];
+            if( isset( $_SESSION['carrello'][$index] ) ){
+                if(!isset( $_SESSION['carrello'][$index]['aggiunti'] ) ){
+                    $_SESSION['carrello'][$index]['aggiunti'] = [];
+                }
+                if(!isset( $_SESSION['carrello'][$index]['rimossi'] ) ){
+                    $_SESSION['carrello'][$index]['rimossi'] = [];
+                }
 
-            if( ( isset( $index ) && isset( $info ) )
-                && $_SESSION['carrello'][$index]['id'] == $info['id']
-            ){
-                $_SESSION['carrello'][$index]['qta'] = $info['qta'];
-                $_SESSION['carrello'][$index]['note'] = $info['note'];
+                if( ( isset( $index ) && isset( $info ) )
+                    && $_SESSION['carrello'][$index]['id'] == $info['id']
+                ){
+                    $_SESSION['carrello'][$index]['qta'] = $info['qta'];
+                    $_SESSION['carrello'][$index]['note'] = $info['note'];
+                }
             }
         }
         include_once('../forms/carrelloForm.php');

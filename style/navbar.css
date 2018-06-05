@@ -14,13 +14,13 @@
 }
 #nav li a
 {
-    color: #fff;
+    color: white;
     display: block;
     text-decoration: none;
 }
 #nav li a:active
 {
-    background-color: #c00 !important;
+    background-color: darkred !important;
 }
 
 #nav span:after
@@ -29,7 +29,7 @@
     height: 0;
     border: 0.313em solid transparent; /* 5 */
     border-bottom: none;
-    border-top-color: #efa585;
+    border-top-color: yellowgreen;
     content: '';
     vertical-align: middle;
     display: inline-block;
@@ -44,6 +44,7 @@
     z-index: 1;
     height: 3.75em; /* 60 */
     background-color: crimson;
+    padding: 0;
 }
 
 #nav > ul > li
@@ -68,7 +69,7 @@
 #nav > ul > li:hover > a,
 #nav > ul:not( :hover ) > li.active > a
 {
-    background-color: #cc470d;
+    background-color: darkred;
 }
 
 
@@ -162,9 +163,13 @@
 #nav li ul li a:hover,
 #nav li ul:not( :hover ) li.active a
 {
-    background-color: #e15a1f;
+    background-color: darkred;
 }
 
+#nav li a:hover
+{
+    cursor: pointer;
+}
 @media only screen and ( max-width: 40em ) /* 640 */
 {
 

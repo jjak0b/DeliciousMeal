@@ -6,7 +6,7 @@
 <nav id="nav" role="navigation">
     <ul>
         <li><a href="index.php">Home</a></li>
-        <li><a>Azienda</a>
+        <li><a><span>Azienda</span></a>
             <ul>
                 <li>
                     <a href="pages/azienda/AreaPersonale.php">Area Personale</a>

@@ -35,28 +35,80 @@
         ?>
         <div class="main">
             <div class="container">
-                <div class="slide-wrap">
+                <div class="wrapper">
                     <h2 class="center">I nostri 5 prodotti più apprezzati:</h2>
-                    <div class="slide-mask">
-                      <ul class="slide-group">
-                        <?php
-                            foreach ( $rows as $key => $product ) {
-                                echo "<li class=\"slide\" value=\"$product[id]\" title=\"$product[nome]\"><img src=\"img/$product[img]\" alt=\"$product[nome]\">";
-                            }
-                        ?>
-                      </ul>
-                    </div>
-                    <div class="slide-nav">
-                      <ul>
-                        <?php
-                            foreach ( $rows as $key => $product ) {
-                                echo "<li class=\"bullet\" title=\"$product[nome]\"></li>";
-                            }
-                        ?>
-                      </ul>
+                    <div class="jcarousel-wrapper">
+                        <div class="jcarousel">
+                            <ul>
+                                <?php
+                                    foreach ( $rows as $key => $product ) {
+                                        echo "<li value=\"$product[id]\" title=\"$product[nome]\"><img src=\"img/$product[img]\" alt=\"$product[nome]\"></li>";
+                                    }
+                                ?>
+                            </ul>
+                        </div>
+                        <a href="#" class="jcarousel-control-prev">&lsaquo;</a>
+                        <a href="#" class="jcarousel-control-next">&rsaquo;</a>
+                        <p class="jcarousel-pagination">
+                        </p>
                     </div>
                 </div>
-                <script src="scripts/js/slide.js"></script>
+                <script type="text/javascript" src="ajax/libs/jcarousel/jcarousel-core.js"></script>
+                <script type="text/javascript" src="ajax/libs/jcarousel/jcarousel-control.js"></script>
+                <script type="text/javascript" src="ajax/libs/jcarousel/jcarousel-pagination.js"></script>
+                <script type="text/javascript" src="ajax/libs/jcarousel/jcarousel-autoscroll.js"></script>
+                <script type="text/javascript" src="ajax/libs/jcarousel/jcarousel-scrollintoview.js"></script>
+                <script type="text/javascript">
+                (function($) {
+                    $(function() {
+                        var interval = 3000;
+                        $('.jcarousel').jcarousel();
+                        $('.jcarousel')
+                            .jcarouselAutoscroll({
+                                interval: interval,
+                                target: '+=1',
+                                autostart: true,
+                                method: 'scroll'
+                            });
+                        $('.jcarousel')
+                            .on('jcarousel:scrollend', function() {
+                                if( !$(this).jcarousel("hasNext") ){
+                                    $(this).jcarousel('scroll', 0);
+                                }
+                            });
+                        $('.jcarousel-control-prev')
+                            .on('jcarouselcontrol:active', function() {
+                                $(this).removeClass('inactive');
+                            })
+                            .on('jcarouselcontrol:inactive', function() {
+                                $(this).addClass('inactive');
+                            })
+                            .jcarouselControl({
+                                target: '-=1'
+                            });
+
+                        $('.jcarousel-control-next')
+                            .on('jcarouselcontrol:active', function() {
+                                $(this).removeClass('inactive');
+                            })
+                            .on('jcarouselcontrol:inactive', function() {
+                                $(this).addClass('inactive');
+                            })
+                            .jcarouselControl({
+                                target: '+=1'
+                            });
+
+                        $('.jcarousel-pagination')
+                            .on('jcarouselpagination:active', 'a', function() {
+                                $(this).addClass('active');
+                            })
+                            .on('jcarouselpagination:inactive', 'a', function() {
+                                $(this).removeClass('active');
+                            })
+                            .jcarouselPagination();
+                    });
+                })(jQuery);
+                </script>
             </div>
         </div>
     </body>

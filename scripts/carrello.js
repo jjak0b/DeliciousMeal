@@ -155,23 +155,7 @@ function updateCart( element, id_elem, b_only_server){
     info['id'] = $(element).attr("value");
     info['qta'] = $(element).find( "[name='quantity']" ).val();
     info['note'] = $(element).find( "[name='note']" ).val();
-    var value = { index: index, data: info };
-    $.ajax(
-    {
-        type: 'post',
-        url: 'scripts/carrello.php',
-        data:
-        {
-            action: "update",
-            value: JSON.stringify( value )
-        },
-        success: function (response) 
-        {
-            if( b_only_server == undefined || b_only_server == false ){
-                updateCartContent( response, true);
-            }
-        }
-    });   
+    return { index: index, data: info };
 }
 // questo è un aggiorna
 function refreshCart( b_updateonly ){
@@ -202,10 +186,47 @@ function updateCartElements( cart, b_only_server){
     if( cart == undefined ){
         cart = $("#cart_form");
     }
-    
+    var data_values = new Array();
     $(cart).find( ".product-item" ).each( function( index, element ){
-        updateCart( element, $( element ).attr("id"), b_only_server );
+        data_values.push(
+                updateCart(
+                    element,
+                    $( element ).attr("id"),
+                    b_only_server ) );
     });
+    var json_data = JSON.stringify( data_values );
+    var ajaxObj = $.ajax(
+    {
+        async: false,// lo so, è pericoloso ma ne necessito
+        type: 'post',
+        url: 'scripts/carrello.php',
+        data:
+        {
+            action: "update",
+            value: json_data
+        },
+        beforeSend: function(){
+            console.log("Salvataggio dati su server:\n"+ json_data );
+            // inizio loader
+            var loader = createLoader(undefined, "loader");
+            $( cart ).find(".container").css( "display", "none" );
+            $( loader ).insertBefore( $( cart ).find(".container") );
+        },
+        error: function (jqXHR, textStatus, errorThrown) {
+            alert("Errore di connessione, riprovare");
+            $( cart ).find( ".loader" ).remove();
+            $( cart ).find(".container").css( "display", "block" );
+        },
+        success: function (response) 
+        {
+            $( cart ).find( ".loader" ).remove();
+            $( cart ).find(".container").css( "display", "block" );
+            // fine loader
+            if( b_only_server == undefined || b_only_server == false ){
+                updateCartContent( response, true);
+            }
+        }
+    });   
 }
 
 function updateCartContent( html, b_updateonly ){
@@ -230,7 +251,7 @@ function updateCartContent( html, b_updateonly ){
 
 function order(){
     updateCartElements( undefined, false );
-    
+    var cart = $( "#cart_form" );
     if( $( "#cart_form" ).find(".container").find(".product-item").length > 0 ){
         $.ajax(
         {
@@ -243,18 +264,20 @@ function order(){
             beforeSend: function(){
                 // inizio loader
                 var loader = createLoader(undefined, "loader");
-                $( "#cart_form" ).find(".container").css( "display", "none" );
+                $( cart ).find(".container").css( "display", "none" );
                 $( loader ).insertBefore( $( "#cart_form" ).find(".container") );
             },
             error: function (jqXHR, textStatus, errorThrown) {
                 alert("Errore di connessione, riprovare");
+                $( cart ).find( ".loader" ).remove();
+                $( cart ).find(".container").css( "display", "block" );
             },
             success: function (response_a) 
             {
-                $( "#cart_form" ).find( ".loader" ).remove();
-                $( "#cart_form" ).find(".container").css( "display", "block" );
+                $( cart ).find( ".loader" ).remove();
+                $( cart ).find(".container").css( "display", "block" );
                 // fine loader
-                $( "#cart_form" ).find(".container").html( response_a );
+                $( cart ).find(".container").html( response_a );
             }   
         });
     }
