@@ -25,17 +25,12 @@
         <li>
             <a><span>Prodotti</span></a>
             <ul>
-                <li>
-                    <a href="pages/prodotti.php"><span>Menù</span></a>
-                    <ul>
-                        <li><a href="pages/prodotti.php?c=1">Antipasti</a></li>
-                        <li><a href="pages/prodotti.php?c=2">Primi</a></li>
-                        <li><a href="pages/prodotti.php?c=3">Secondi</a></li>
-                        <li><a href="pages/prodotti.php?c=4">Dolci</a></li>
-                        <li><a href="pages/prodotti.php?c=6">Pizze</a></li>
-                        <li><a href="pages/prodotti.php?c=5">Bevande</a></li>
-                    </ul>
-                </li>
+                <li><a href="pages/prodotti.php?c=1">Antipasti</a></li>
+                <li><a href="pages/prodotti.php?c=2">Primi</a></li>
+                <li><a href="pages/prodotti.php?c=3">Secondi</a></li>
+                <li><a href="pages/prodotti.php?c=4">Dolci</a></li>
+                <li><a href="pages/prodotti.php?c=6">Pizze</a></li>
+                <li><a href="pages/prodotti.php?c=5">Bevande</a></li>
             </ul>
         </li>
         <li><a href="pages/contatti.php">Contatti</a></li>

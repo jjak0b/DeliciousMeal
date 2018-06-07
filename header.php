@@ -8,11 +8,11 @@ echo "<header>
             <div class=\"logo-container-content left\">
                 <h1>Delicious Meal</h1>
             </div>
-        </div>
-        <div class=\"right\">
+        </div>";
+        /*<div class=\"right\">
             <h2>Developed By Jacopo Rimediotti</h2>
-        </div>
-        <div class=\"clear\"></div>
+        </div>*/
+echo    "<div class=\"clear\"></div>
             <!--<h1 class=\"logo\">Delicious Meal</h1>-->
 
         <div class=\"logo-motto\">

@@ -20,15 +20,15 @@
         echo "<ul id=\"correnti\" class=\"editable-list\" name=\"correnti\" size=".count($correnti).">";
         foreach ($correnti as $key => $row) {
             echo "<li class=\"editable-item\" value=".$row['id'].">";
-                echo "<div>";
-                    echo "<div class=\"editable-label\">";
+                //echo "<div class=\"clearfix\">";
+                    echo "<span class=\"editable-label\">";
                         echo "<label>".$row['nome']."</label>";
-                    echo "</div>";
-                    echo "<div class=\"editable-button\">";
+                    echo "</span>";
+                    echo "<span class=\"editable-button\">";
                         echo "<button class=\"btn-remove\">";
                         echo "</button>";
-                    echo "</div>";
-                echo "</div>";
+                    echo "</span>";
+                //echo "</div>";
             echo "</li>";
         }
         echo "</ul>";
@@ -43,15 +43,15 @@
         echo "<ul id=\"disponibili\" class=\"editable-list\" name=\"disponibili\" size=".count($disponibili).">";
         foreach ($disponibili as $key => $row) {
             echo "<li class=\"editable-item\" value=".$row['id'].">";
-                echo "<div>";
-                    echo "<div class=\"editable-label\">";
+                //echo "<div class=\"clearfix\">";
+                    echo "<span class=\"editable-label\">";
                         echo "<label>".$row['nome']."</label>";
-                    echo "</div>";
-                    echo "<div class=\"editable-button\">";
+                    echo "</span>";
+                    echo "<span class=\"editable-button\">";
                         echo "<button class=\"btn-add\">";
                         echo "</button>";
-                    echo "</div>";
-                echo "</div>";
+                    echo "</span>";
+                //echo "</div>";
             echo "</li>";
         }
         echo "</ul>";

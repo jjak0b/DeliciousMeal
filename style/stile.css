@@ -34,9 +34,14 @@
     display: block;
 }
 
+.clearfix::after {
+    content: "";
+    clear: both;
+    display: table;
+}
 
 body{
-    margin: 5% 5%;
+    margin: 2% 10%;
     background-color: whitesmoke;
 }
 
@@ -424,6 +429,7 @@ ul.tree ul li {
 {
     height: 180px;
     width: 300px;
+    border-radius: 2em;
 }
 .product-preview:hover
 {
@@ -484,8 +490,9 @@ button {
     padding: 0.8em 1em;
     border: none;
     cursor: pointer;
-    width: 100%;
-    min-width: max-content;
+    width: 50%;
+    min-width: min-content;
+    border-radius: 0.5em;
 }
 
 .form-section{
@@ -629,20 +636,21 @@ button:hover {
     margin: 0;
     /*margin-left: 2em;*/
     max-height: 250px;
+    width: 100%;
 }
 .editable-item{
     text-align: left;
     margin: 0.1em 0.1em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 .editable-label{
-    display: inline-block;
-    width: 80%;
+    width: min-content;
 }
-.editable-button{
-    display: inline-block;
-    width: 20%;
+.editable-button > button{
+    width: 100%;
 }
-
 .btn-add:after{
     content: "+";
 }

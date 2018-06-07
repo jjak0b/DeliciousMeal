@@ -2,7 +2,7 @@
     <div class="center" >
         <div class="form-section">
             <label class="form-field"><b>Nome</b></label>
-            <input class="form-field"type="text" placeholder="Il tuo Nome" name="name" required>
+            <input class="form-field" type="text" placeholder="Il tuo Nome" name="name" required>
         </div>
         <div class="form-section">
             <label class="form-field"><b>Cognome</b></label>
