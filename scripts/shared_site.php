@@ -2,24 +2,28 @@
 /*
  * Funzioni condivise e utilizzate da altri script del sito
  */
+
+function get_ingredienti_supplementi( $connection, $id_pietanza){
+    $query = quick_select2(
+            array("i.id", "i.nome", "i.prezzo"),
+            array("ingredienti i", "pietanze p", "ingredienti_supplementari sup"),
+            array("i.id", "p.id", "sup.id_pietanza"),
+            array("sup.id_ingrediente", "sup.id_pietanza", $id_pietanza) );
+    $query = $query." ORDER BY i.nome";
+    $result = mysqli_query($connection, $query );
+    $rows = [];
+    while( $row = mysqli_fetch_assoc($result) ){
+        $rows[] = $row;
+    }
+    return $rows;
+}
 function get_ingredienti_disponibili( $connection, $index, $id_pietanza ){
     /*  $query_ing_default = quick_select2(
                 array("i.id"),
                 array("ingredienti i", "ingredienti_pietanze ip", "pietanze p"),
                 array("i.id", "p.id", "p.id"),
                 array( "ip.id_ingrediente", "ip.id_pietanza", $id_pietanza) );*/
-    $query_ing_sup = quick_select2(
-            array("i.id", "i.nome", "i.prezzo"),
-            array("ingredienti i", "pietanze p", "ingredienti_supplementari sup"),
-            array("i.id", "p.id", "sup.id_pietanza"),
-            array("sup.id_ingrediente", "sup.id_pietanza", $id_pietanza) );
-    $query_ing_available = $query_ing_sup." ORDER BY i.nome";
-    $result_available = mysqli_query($connection, $query_ing_available );
-    $rows = [];
-    while( $row = mysqli_fetch_assoc($result_available) ){
-        $rows[] = $row;
-    }
-    
+    $rows = get_ingredienti_supplementi( $connection, $id_pietanza);
     if( !isset( $_SESSION['carrello'][$index]['aggiunti'] ) ){
         $_SESSION['carrello'][$index]['aggiunti'] = [];
     }
@@ -77,6 +81,7 @@ function get_default_ingredienti( $connection, $id_pietanza ){
             array("ingredienti i", "ingredienti_pietanze ip", "pietanze p"),
             array("i.id", "p.id", "p.id"),
             array( "ip.id_ingrediente", "ip.id_pietanza", $id_pietanza) );
+    $query_ing_default.=" ORDER BY i.nome";
     $result_default = mysqli_query($connection, $query_ing_default );
     $rows = [];
     while( $row = mysqli_fetch_assoc($result_default) ){

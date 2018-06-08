@@ -131,11 +131,9 @@
                                             echo "<ul class=\"editable-list\" name=\"aggiunti\" value=\"".$prodotto['id']."\" style=\"display: none;\">";
                                             foreach ($prodotto['aggiunti'] as $key => $ingrediente) {
                                                 echo "<li class=\"editable-item\" value=".$ingrediente['id'].">";
-                                                    echo "<div>";
-                                                        echo "<div class=\"editable-label\">";
+                                                        echo "<span class=\"editable-label\">";
                                                             echo "<label>".$ingrediente['nome']."</label>";
-                                                        echo "</div>";
-                                                    echo "</div>";
+                                                        echo "</span>";
                                                 echo "</li>";
                                             }
                                             echo "</ul>";
@@ -147,11 +145,9 @@
                                             echo "<ul class=\"editable-list\" name=\"rimossi\" value=\"".$prodotto['id']."\" style=\"display: none;\">";
                                             foreach ($prodotto['rimossi'] as $key => $ingrediente) {
                                                 echo "<li class=\"editable-item\" value=".$ingrediente['id'].">";
-                                                    echo "<div>";
-                                                        echo "<div class=\"editable-label\">";
+                                                        echo "<span class=\"editable-label\">";
                                                             echo "<label>".$ingrediente['nome']."</label>";
-                                                        echo "</div>";
-                                                    echo "</div>";
+                                                        echo "</span>";
                                                 echo "</li>";
                                             }
                                             echo "</ul>";

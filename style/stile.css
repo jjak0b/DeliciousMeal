@@ -48,7 +48,7 @@ body{
 
 header {
     background-color: transparent;
-    font-family: cursive;
+    font-family: "Comic Sans MS", cursive, sans-serif;
     display: block;
 }
 
@@ -85,7 +85,7 @@ header {
 .logo-text {
     display: block;
     text-align: center;
-    font-family: cursive;
+    font-family: "Comic Sans MS", cursive, sans-serif;
     background-color: whitesmoke;
     padding: 0 0 0 0;
     margin: 0;
@@ -330,6 +330,7 @@ ul.tree ul li {
 .product-content
 {
     margin: 0.8em;
+    text-align: center;
 }
 
 .product-description,
@@ -346,10 +347,6 @@ ul.tree ul li {
     width: 80%;
 }
 
-.product-content
-{
-    width: 100%;
-}
 
 .product-general
 {
@@ -385,7 +382,6 @@ ul.tree ul li {
 .product-general
 {
     margin: 0.8em 3.5em;
-    margin-left: 0;
     vertical-align: middle;
 }
 
@@ -405,6 +401,14 @@ ul.tree ul li {
         width: 40%;
     }
     
+    .product-description,
+    .product-assets,
+    .product-general
+    {
+        margin: auto;
+    }
+
+
     .product-item > td
     {
         display: inline-block;
@@ -439,11 +443,13 @@ ul.tree ul li {
 {
     display: block;
     vertical-align: middle;
+    text-align: justify;
+    
 }
 .product-general
 {
     vertical-align: middle;
-    min-width: max-content;
+    
 }
 
 .product-name
@@ -645,6 +651,9 @@ button:hover {
     justify-content: space-between;
     align-items: center;
 }
+.editable-item:focus {
+    transform: scale(2, 3);
+}
 .editable-label{
     width: min-content;
 }
@@ -652,10 +661,10 @@ button:hover {
     width: 100%;
 }
 .btn-add:after{
-    content: "+";
+    content: "\002B";
 }
 .btn-remove:after{
-    content: "-";
+    content: "\002D";
 }
 
 /* slider
