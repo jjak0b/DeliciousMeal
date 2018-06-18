@@ -1,9 +1,9 @@
 function createModalForm( content ){
-    var div = $("<div>");
-    var div_content = $("<div>");
-    var div_header = $("<div>");
-    var close_btn = $("<span>");
-    var container = $("<div>");
+    var div = document.createElement("div");
+    var div_content = document.createElement("div");
+    var div_header = document.createElement("div");
+    var close_btn = document.createElement("span");
+    var container = document.createElement("div");
     
     $( div ).append( div_content );
     $( div_content ).append( container);
@@ -11,30 +11,30 @@ function createModalForm( content ){
     $( div_header ).append( close_btn );
     $( div_header ).insertBefore( container );
     
-    div.addClass( "modal" );
-    div_content.addClass( "modal-content" );
-    div_content.addClass( "animate" );
-    div_header.addClass( "header_container");
+    $( div ).addClass( "modal" );
+    $( div_content ).addClass( "modal-content" );
+    $( div_content ).addClass( "animate" );
+    $( div_header ).addClass( "header_container");
     // div_header.css( "padding-top", "0");
     // div_header.css( "padding-bottom", "0");
     // When the user clicks anywhere outside of the modal, close it
-    div.click( {div: div}, function( event ){
+    $( div ).click( {div: div}, function( event ){
             if ( $( event.target ).is( event.data.div) ){
                 closeModalForm( event );
             }
         }
     );
     
-    close_btn.html( "&times;");
-    close_btn.attr( "title", "Chiudi");
-    close_btn.addClass("close");
-    close_btn.click( {div: div}, function( event ){
+    $( close_btn ).html( "&times;");
+    $( close_btn ).attr( "title", "Chiudi");
+    $( close_btn ).addClass("close");
+    $( close_btn ).click( {div: div}, function( event ){
         closeModalForm( event );
     });
     
-    container.addClass( "container" );
-    container.html( content );
-    return div;
+    $( container ).addClass( "container" );
+    $( container ).html( content );
+    return $(div);
 }
 
 function closeModalForm( event ){
