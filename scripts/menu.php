@@ -59,7 +59,7 @@
     {
         echo "<li class=\"menu-elem blind-content in\" value=".$piatto["id"].">";
             echo "<div class=\"product-header\">";
-                echo "<h4 class=\"product-name\">".$piatto['nome']."</h4>";
+                echo "<h3 class=\"product-name\">".$piatto['nome']."</h3>";
             echo "</div>";
             echo "<div class=\"product-content\">";
                 echo "<div class=\"product-description\">";
@@ -79,7 +79,7 @@
                             $str_ingredienti_list = implode(
                                     ", ",
                                     $ingredienti_nome);
-                            echo "<fieldset><legend>Contenuto:</legend>".$str_ingredienti_list."</fieldset>";
+                            echo "<fieldset><legend>Contenuto:</legend>".$str_ingredienti_list."</fieldset><br>";
                         }
                         if( count( $ingredienti_sup ) > 0){
                             $supplementi_nome = array();
@@ -89,7 +89,7 @@
                             $str_supplementi_list = implode(
                                     ", ",
                                     $supplementi_nome);
-                            echo "<fieldset><legend>Supplementi:</legend>".$str_supplementi_list."</fieldset>";
+                            echo "<fieldset><legend>Supplementi:</legend>".$str_supplementi_list."</fieldset><br>";
                         }
                     }
                     else if( $piatto['categoria'] == 5 )// bevande

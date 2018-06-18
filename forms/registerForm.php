@@ -20,7 +20,9 @@
         <button type="submit">Registrati</button>
     </div>
     <div class="center" >
-        <label>Hai già un account?</label>
-        <button type="button" onclick="loginSection(this)" style="width:50%;"<b>Accedi</b></button>
+        <div class="form-section">
+            <label class="form-field">Hai già un account?</label>
+            <button class="form-field" type="button" onclick="loginSection(this)" style="width:50%;"<b>Accedi</b></button>
+        </div>
     </div>
 </form>

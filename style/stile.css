@@ -61,7 +61,7 @@ header {
 }
 
 .logo-container-content > * {
-    color: crimson;
+    color: #d60000;
     display: block;
 }
 
@@ -111,7 +111,7 @@ div.main {
     overflow-y: scroll;
 }
 .navbar {
-    background-color: crimson;
+    background-color: #d60000;
     margin: 0;
     padding-bottom: 0;
     height: max-content;
@@ -174,7 +174,7 @@ div.main {
 .dropdown,
 .field 
 {
-    background-color: crimson;
+    background-color: #d60000;
 }
 
 .dropdown > .dropbtn,
@@ -344,13 +344,12 @@ ul.tree ul li {
 
 .product-header
 {
-    width: 80%;
+    
 }
 
 
 .product-general
 {
-    width: 10%;
 }
 
 
@@ -386,38 +385,6 @@ ul.tree ul li {
 }
 
 
-/* Use a media query to add a break point at 800px: */
-@media screen and (max-width:850px) {
-    .product-description
-    {
-      width:100%; /* The width is 100%, when the viewport is 800px or smaller */
-    }
-
-    .product-assets,
-    .product-general
-    {
-        text-align: center;
-        margin: 0 10%;
-        width: 40%;
-    }
-    
-    .product-description,
-    .product-assets,
-    .product-general
-    {
-        margin: auto;
-    }
-
-
-    .product-item > td
-    {
-        display: inline-block;
-    }
-    .product-item > td > span
-    {
-        float: right;
-    }
-}
 .product-assets
 {
 
@@ -431,13 +398,14 @@ ul.tree ul li {
 }
 .product-preview > *
 {
-    height: 180px;
-    width: 300px;
+    height: 28vmin;
+    width: 50vmin;
     border-radius: 2em;
 }
 .product-preview:hover
 {
-    transform: scale(1.5); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    /*transform: scale(1.25); */
 }
 .product-list
 {
@@ -463,6 +431,43 @@ ul.tree ul li {
     padding: 0.5em;
 }
 
+/* Use a media query to add a break point at 800px: */
+@media screen and (max-width:850px) {
+    .product-description
+    {
+      width:100%; /* The width is 100%, when the viewport is 800px or smaller */
+    }
+
+    .product-preview:hover
+    {
+        transform: scale(1.75); /* (150% zoom - Note: if the zoom is too large, it will go outside of the viewport) */
+    }
+    
+    .product-assets,
+    .product-general
+    {
+        text-align: center;
+        margin: 0 10%;
+        width: 40%;
+    }
+    
+    .product-description,
+    .product-assets,
+    .product-general
+    {
+        margin: auto;
+    }
+
+
+    .product-item > td
+    {
+        display: inline-block;
+    }
+    .product-item > td > span
+    {
+        float: right;
+    }
+}
 /*Login*/
 
 /* Full-width inputs */
@@ -491,7 +496,7 @@ details{
 }
 /* Set a style for all buttons */
 button {
-    background-color: crimson;
+    background-color: #d60000;
     color: white;
     padding: 0.8em 1em;
     border: none;
@@ -505,6 +510,7 @@ button {
     display: block;
     font-size: 0.8em;
     text-align: center;
+    padding: 0.8em 1em;
 }
 
 .form-field{
@@ -721,7 +727,7 @@ button:hover {
     margin-left: .5em;
 }
 .slide-nav li.current {
-    background: crimson;
+    background: #d60000;
 }
 
 /*loader*/
@@ -729,7 +735,7 @@ button:hover {
 .loading:before {
     border: 5vmin solid yellowgreen;
     border-radius: 100%;
-    border-top: 5vmin solid crimson;
+    border-top: 5vmin solid #d60000;
     height: 20vmin;
     width: 20vmin;
     -webkit-animation: spin 2s linear infinite; /* Safari */

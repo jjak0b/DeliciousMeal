@@ -40,7 +40,7 @@ function createModificaIngredientiForm( id_prod, cart_index ){
                     $(btn).click( params, addIngrediente );
                 });
                 $( item ).find(".btn-remove").each( function( index, btn ){
-                    $(btn).css("background-color", "crimson");
+                    $(btn).css("background-color", "#d60000");
                     $(btn).click( params, removeIngrediente );
                 });
             });

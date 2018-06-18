@@ -43,7 +43,7 @@
 {
     z-index: 1;
     height: 3.75em; /* 60 */
-    background-color: crimson;
+    background-color: #d60000;
     padding: 0;
     margin: 0;
 }
@@ -102,7 +102,7 @@
 }
 #nav > ul > li > ul > li > a
 {
-    background-color: crimson;
+    background-color: #d60000;
 }
 
 
@@ -114,7 +114,7 @@
     position: absolute;
     border-left: yellowgreen 0.5em solid;
     display: none;
-    background-color: crimson;
+    background-color: #d60000;
     margin-left: 1em;
 }
 
