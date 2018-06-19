@@ -86,7 +86,7 @@ if( !isset( $_SESSION['carrello'] ) ){
                         $qta = $prodotto["qta"];
                     }
                     $tot += ( ($prodotto['prezzo']+$tot_suppl)* $qta);
-                    echo "<td><div>".htmlentities("Quantità")."</div><input type=\"number\" name=quantity value=".$qta." min=1></td>";
+                    echo "<td><div>".htmlentities("Quantità")."</div><input type=\"number\" name=quantity value=".$qta." min=\"1\" onchange=\"on_change_qta(this)\" onkeyup=\"on_change_qta(this)\" onpaste=\"on_change_qta(this)\"></td>";
                     echo "<td>";
                         echo "<div>";
                         if( isset( $prodotto["aggiunti"] ) && count( $prodotto["aggiunti"] ) > 0 ){
@@ -129,7 +129,7 @@ if( !isset( $_SESSION['carrello'] ) ){
         echo "<tr>";
             echo "<th>Importo totale</th>";
         echo "</tr>";
-        echo "<tr><td id=\"importo-totale\">Euro $tot</td></tr>";
+        echo "<tr><td id=\"importo-totale\"><span>Euro $tot</span></td></tr>";
     echo "</table>";
     echo "<br>";
     mysqli_close($connection);
@@ -137,18 +137,25 @@ if( !isset( $_SESSION['carrello'] ) ){
     ?>
     <button onclick="order()">Ordine ultimato</button>
     <script>
+        function on_change_qta( e ){
+            if ( $( e ).val() == undefined || $( e ).val() == '' ) {
+                $( e ).val(1);
+            }
+            update_price();
+        }
+        
         function update_price(){
             var ul = document.getElementById( "cart_list" );
             var tot = 0.00;
-            $(ul).find( ".product-item" ).each(function( index, elem ){
-                tot += get_item_price( li );
+            $(ul).find( ".product-item" ).each(function( index, li ){
+                tot += Number(( get_item_price( li )).toFixed(2));
             });
-            var e_tot = document.getElementById( "cart_list" );
-            $( e_tot ).html("<span>Euro " + tot +"</span>");
+            var e_tot = document.getElementById( "importo-totale" );
+            $( e_tot ).html("<span>Euro " + tot.toFixed(2) +"</span>");
         }
         function get_item_price( li ){
-            var p_u = $( li ).find( "input[name=p_u]").attr("value");
-            var qta = $( li ).find( "input[name=quantity]").attr("value");
+            var p_u = $( li ).find( "input[name=p_u]").val();
+            var qta = $( li ).find( "input[name=quantity]").val();
             return p_u*qta;
         }
     </script>
